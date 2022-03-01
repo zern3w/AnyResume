@@ -1,15 +1,11 @@
 package com.testanymind.presentation.view
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.testanymind.presentation.R
 import com.testanymind.presentation.databinding.ItemEducationBinding
 
-class EducationAdapter(private val dataList: List<Education>) :
+class EducationAdapter(private var dataList: List<Education>) :
     RecyclerView.Adapter<EducationAdapter.EducationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EducationViewHolder {
@@ -23,6 +19,11 @@ class EducationAdapter(private val dataList: List<Education>) :
     }
 
     override fun getItemCount() = dataList.size
+
+    fun submitData(list: List<Education>) {
+        this.dataList = list
+        notifyDataSetChanged()
+    }
 
     class EducationViewHolder(private val binding: ItemEducationBinding) :
         RecyclerView.ViewHolder(binding.root) {

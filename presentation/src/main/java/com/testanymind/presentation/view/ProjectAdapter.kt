@@ -10,7 +10,7 @@ import com.testanymind.presentation.getExpandAnimation
 
 private const val ARROW_ROTATION_DURATION = 200L
 
-class ProjectAdapter(private val dataList: List<ProjectDetail>) :
+class ProjectAdapter(private var dataList: List<ProjectDetail>) :
     RecyclerView.Adapter<ProjectAdapter.ProjectDetailViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectDetailViewHolder {
@@ -24,6 +24,11 @@ class ProjectAdapter(private val dataList: List<ProjectDetail>) :
     }
 
     override fun getItemCount() = dataList.size
+
+    fun submitData(list: List<ProjectDetail>) {
+        this.dataList = list
+        notifyDataSetChanged()
+    }
 
     class ProjectDetailViewHolder(private val binding: ItemProjectBinding) :
         RecyclerView.ViewHolder(binding.root) {

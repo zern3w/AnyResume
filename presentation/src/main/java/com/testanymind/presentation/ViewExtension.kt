@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.imageview.ShapeableImageView
@@ -130,4 +132,10 @@ fun setImage(image: ShapeableImageView, url: String, placeHolder: Drawable) {
         }
 
     }
+}
+
+fun ShapeableImageView.load(url: String) {
+    Glide.with(this)
+        .load(url)
+        .into(this)
 }

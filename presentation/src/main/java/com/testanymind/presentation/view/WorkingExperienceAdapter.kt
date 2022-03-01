@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.testanymind.presentation.databinding.ItemWorkingExperienceBinding
 
-class WorkingExperienceAdapter(private val dataList: List<WorkingExperience>) :
+class WorkingExperienceAdapter(private var dataList: List<WorkingExperience>) :
     RecyclerView.Adapter<WorkingExperienceAdapter.WorkingExperienceViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkingExperienceViewHolder {
@@ -19,6 +19,11 @@ class WorkingExperienceAdapter(private val dataList: List<WorkingExperience>) :
     }
 
     override fun getItemCount() = dataList.size
+
+    fun submitData(list: List<WorkingExperience>) {
+        this.dataList = list
+        notifyDataSetChanged()
+    }
 
     class WorkingExperienceViewHolder(private val binding: ItemWorkingExperienceBinding) :
         RecyclerView.ViewHolder(binding.root) {
