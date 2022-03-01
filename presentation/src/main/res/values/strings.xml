@@ -1,1 +1,33 @@
-<resources></resources>
+<resources>
+    <string name="personal">Personal</string>
+    <string name="education">Education</string>
+    <string name="skills">Skills</string>
+    <string name="experiences">Experiences</string>
+    <string name="portfolio">Portfolio</string>
+
+    <string name="mobile">Mobile</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+
+    <string name="_class">Class</string>
+    <string name="passing_year">Passing Year</string>
+    <string name="gpa">GPA</string>
+    <string name="gpa_value">GPA %s</string>
+
+    <string name="career_objective">Career Objective</string>
+    <string name="total_year_of_experience">Total year of experience</string>
+
+    <plurals name="year">
+        <item quantity="one">year</item>
+        <item quantity="many">years</item>
+    </plurals>
+
+    <string name="work_summary">Work Summary</string>
+
+    <string name="project">Project</string>
+    <string name="role">Role</string>
+    <string name="tech_stack">Tech Stack</string>
+
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+
+</resources>
