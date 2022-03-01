@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -37,7 +36,42 @@
                     android:textColor="@color/grey_90"
                     android:textStyle="bold" />
 
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_edit_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_save"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="@dimen/spacing_mlarge"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_checkmark"
+                        app:tint="@color/green_700" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_cancel"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="@dimen/spacing_mlarge"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_cross"
+                        app:tint="@color/red_700" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_edit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="@dimen/spacing_mlarge"
+                        app:srcCompat="@drawable/ic_document_edit"
+                        app:tint="@color/grey_700" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_icon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="@dimen/spacing_mlarge"

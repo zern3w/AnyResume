@@ -2,6 +2,7 @@ package com.testanymind.presentation.view.activity
 
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.testanymind.presentation.R
@@ -9,12 +10,16 @@ import com.testanymind.presentation.addChips
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityMainBinding
 import com.testanymind.presentation.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : DataBindingActivity<ActivityMainBinding>() {
 
     override fun layoutId() = R.layout.activity_main
-
     override fun getToolBar() = viewBinding.toolbar
+
+    private val viewModel: MainViewModel by viewModel()
+
+    private var isEditModeSwitch = false
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(androidx.core.R.menu.example_menu, menu)
@@ -40,6 +45,21 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
                 setDividerColorResource(this@MainActivity, R.color.grey_divider)
                 dividerInsetStart = resources.getDimensionPixelOffset(R.dimen.spacing_xxxlarge)
                 isLastItemDecorated = false
+            }
+
+            viewPersonal.ivEdit.setOnClickListener {
+                isPersonalEditingMode(true)
+            }
+            viewPersonal.ivSave.setOnClickListener {
+                isPersonalEditingMode(false)
+            }
+            viewPersonal.ivCancel.setOnClickListener {
+                isPersonalEditingMode(false)
+            }
+
+            ivAvatar.setOnLongClickListener {
+                isEditModeSwitch(isEditModeSwitch)
+                true
             }
 
             viewPersonal.etMobile.setText("099-4799456")
@@ -189,6 +209,35 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
                     "Jetpack"
                 )
             )
+        }
+    }
+
+    private fun isEditModeSwitch(edited: Boolean) {
+        isEditModeSwitch = !edited
+
+        viewBinding.apply {
+            viewPersonal.llEditMode.isVisible = isEditModeSwitch
+            viewPersonal.ivIcon.isVisible = !isEditModeSwitch
+
+            viewEducation.ivEdit.isVisible = isEditModeSwitch
+            viewEducation.ivIcon.isVisible = !isEditModeSwitch
+
+            viewSkill.ivEdit.isVisible = isEditModeSwitch
+            viewSkill.ivIcon.isVisible = !isEditModeSwitch
+
+            viewExperience.ivEdit.isVisible = isEditModeSwitch
+            viewExperience.ivIcon.isVisible = !isEditModeSwitch
+
+            viewProject.ivEdit.isVisible = isEditModeSwitch
+            viewProject.ivIcon.isVisible = !isEditModeSwitch
+        }
+    }
+
+    private fun isPersonalEditingMode(isEditing: Boolean) {
+        viewBinding.apply {
+            viewPersonal.ivEdit.isVisible = !isEditing
+            viewPersonal.ivSave.isVisible = isEditing
+            viewPersonal.ivCancel.isVisible = isEditing
         }
     }
 }
