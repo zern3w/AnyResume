@@ -3,7 +3,6 @@ package com.testanymind.presentation.view.activity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.chip.Chip
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.testanymind.presentation.R
 import com.testanymind.presentation.addChips
@@ -43,7 +42,11 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
                 isLastItemDecorated = false
             }
 
-            rvEducation.apply {
+            viewPersonal.etMobile.setText("099-4799456")
+            viewPersonal.etEmail.setText("puttipong@gmail.com")
+            viewPersonal.etAddress.setText("50/7 Village No.1 Padat Sub-district, Muang District, Chiang Mai, 50100")
+
+            viewEducation.rvEducation.apply {
                 addItemDecoration(divider)
                 adapter = EducationAdapter(
                     listOf(
@@ -65,7 +68,7 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
                 )
             }
 
-            rvExperience.apply {
+            viewExperience.rvExperience.apply {
                 addItemDecoration(divider)
                 adapter = WorkingExperienceAdapter(
                     listOf(
@@ -94,7 +97,7 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
                 )
             }
 
-            rvProject.apply {
+            viewProject.rvProject.apply {
                 addItemDecoration(divider)
                 adapter = ProjectAdapter(
                     listOf(
@@ -174,7 +177,7 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
                 )
             }
 
-            chipGroupSkill.addChips(
+            viewSkill.chipGroupSkill.addChips(
                 listOf(
                     "Android",
                     "Kotlin",
