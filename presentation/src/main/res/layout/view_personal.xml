@@ -71,6 +71,7 @@
                     android:id="@+id/et_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:textColor="@android:color/black"
                     tools:text="099-4799456" />
 
@@ -87,6 +88,8 @@
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:textColor="@android:color/black"
                     tools:text="puttipong@gmail.com" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -102,6 +105,8 @@
                     android:id="@+id/et_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:textColor="@android:color/black"
                     tools:text="50/7 Village No.1 Padat Sub-district, Muang District, Chiang Mai, 50100" />
 
             </com.google.android.material.textfield.TextInputLayout>

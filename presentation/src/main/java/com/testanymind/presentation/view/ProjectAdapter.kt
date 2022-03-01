@@ -21,6 +21,7 @@ class ProjectAdapter(private var dataList: List<ProjectDetail>) :
     override fun onBindViewHolder(holder: ProjectDetailViewHolder, position: Int) {
         val data = dataList[position]
         holder.bind(data)
+        holder.itemView.setOnClickListener { holder.expandOrCollapseContent() }
     }
 
     override fun getItemCount() = dataList.size
@@ -35,7 +36,6 @@ class ProjectAdapter(private var dataList: List<ProjectDetail>) :
 
         private var isContentExpanded = false
 
-
         fun bind(data: ProjectDetail) {
             with(binding) {
                 this.data = data
@@ -44,7 +44,7 @@ class ProjectAdapter(private var dataList: List<ProjectDetail>) :
             }
         }
 
-        private fun expandOrCollapseContent() {
+        fun expandOrCollapseContent() {
             if (isContentExpanded) {
                 closeArrow(binding.ivExpand)
 
