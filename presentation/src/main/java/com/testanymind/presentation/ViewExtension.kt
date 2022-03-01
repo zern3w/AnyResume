@@ -1,15 +1,20 @@
 package com.testanymind.presentation
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-
+import com.google.android.material.imageview.ShapeableImageView
 
 
 fun View.getCollapseAnimation(): Animation {
@@ -99,5 +104,30 @@ fun ChipGroup.addStrokeChips(list: List<String>) {
             isCloseIconVisible = false
         }
         this.addView(chip)
+    }
+}
+
+@BindingAdapter("glideImageUrl", "glidePlaceholder")
+fun setImage(image: ShapeableImageView, url: String, placeHolder: Drawable) {
+
+    if (url.isNotEmpty()) {
+        Glide.with(image.context)
+            .load(url)
+            .into(image)
+    } else {
+        image.apply {
+            val res = image.context.resources
+            val contentPadding = res.getDimensionPixelSize(R.dimen.spacing_xsmall)
+            setContentPadding(
+                contentPadding,
+                contentPadding,
+                contentPadding,
+                contentPadding
+            )
+            setImageDrawable(placeHolder)
+            imageTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(image.context, R.color.grey_400))
+        }
+
     }
 }

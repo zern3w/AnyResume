@@ -17,15 +17,13 @@
         android:padding="@dimen/spacing_large">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image"
+            android:id="@+id/iv_logo"
+            glideImageUrl="@{data.logo}"
+            glidePlaceholder="@{@drawable/ic_graduation}"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:adjustViewBounds="true"
-            android:background="#f0f0f0"
-            app:contentPadding="12dp"
-            app:shapeAppearanceOverlay="@style/circleImageView"
-            app:srcCompat="@drawable/ic_graduation"
-            app:tint="@color/grey_400" />
+            app:shapeAppearanceOverlay="@style/circleImageView" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

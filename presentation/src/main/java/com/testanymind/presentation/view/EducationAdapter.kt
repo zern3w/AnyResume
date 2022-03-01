@@ -1,8 +1,12 @@
 package com.testanymind.presentation.view
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.testanymind.presentation.R
 import com.testanymind.presentation.databinding.ItemEducationBinding
 
 class EducationAdapter(private val dataList: List<Education>) :
@@ -34,6 +38,7 @@ class EducationAdapter(private val dataList: List<Education>) :
 
 data class Education(
     val schoolName: String,
+    val logo: String,
     val _class: String,
     val passingYear: String,
     val gpa: Double
@@ -41,6 +46,7 @@ data class Education(
 
 data class WorkingExperience(
     val companyName: String,
+    val logo: String,
     val role: String,
     val startDate: String,
     val endDate: String
@@ -52,6 +58,7 @@ data class WorkingExperience(
 
 data class ProjectDetail(
     val projectName: String,
+    val logo: String,
     val teamSize: Int,
     val projectSummary: String,
     val technologyUsed: List<String>,

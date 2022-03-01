@@ -23,14 +23,12 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image"
+                glideImageUrl="@{data.logo}"
+                glidePlaceholder="@{@drawable/ic_to_do}"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:adjustViewBounds="true"
-                android:background="#f0f0f0"
-                app:contentPadding="12dp"
-                app:shapeAppearanceOverlay="@style/circleImageView"
-                app:srcCompat="@drawable/ic_to_do"
-                app:tint="@color/grey_400" />
+                app:shapeAppearanceOverlay="@style/circleImageView" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -110,12 +108,11 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group_tech"
+                add_stroke_chips="@{data.technologyUsed}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_middle"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                add_stroke_chips="@{data.technologyUsed}"
-                 />
+                android:layout_marginBottom="@dimen/spacing_medium" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -42,6 +42,7 @@
     <color name="grey_icon_tint">#D3D6DE</color>
     <color name="grey_divider">#F4F5FA</color>
     <color name="grey_subtitle">#E8E9ED</color>
+    <color name="grey_icon_bg">#f0f0f0</color>
 
 
     <!--Material color list from https://material.io/guidelines/style/color.html-->
