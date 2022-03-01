@@ -2,16 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-
-    </data>
+    <data></data>
 
     <com.google.android.material.card.MaterialCardView
         style="@style/cardViewInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_mlarge"
         app:contentPaddingBottom="@dimen/spacing_large">
 
         <LinearLayout
