@@ -60,7 +60,7 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/spacing_large"
-                android:paddingVertical="@dimen/screen_padding">
+                android:paddingVertical="@dimen/spacing_large">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                         android:id="@+id/iv_avatar"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:layout_marginStart="@dimen/screen_padding"
+                        android:layout_marginStart="@dimen/spacing_large"
                         android:adjustViewBounds="true"
                         app:shapeAppearanceOverlay="@style/circleImageView"
                         app:srcCompat="@drawable/placeholder_avatar" />
