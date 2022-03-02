@@ -50,7 +50,7 @@ class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_save -> viewModel.save(this)
+            R.id.menu_save -> viewModel.save()
             R.id.menu_add -> viewModel.showAddEditUi()
         }
         return super.onOptionsItemSelected(item)

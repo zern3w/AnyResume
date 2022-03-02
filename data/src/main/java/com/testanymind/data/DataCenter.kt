@@ -1,6 +1,5 @@
-package com.testanymind.presentation
+package com.testanymind.data
 
-import android.content.Context
 import com.testanymind.domain.model.Education
 import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.domain.model.WorkingExperience
@@ -77,13 +76,13 @@ class DataCenter {
             )
         }
 
-        fun getDemoProjectList(context: Context): List<ProjectDetail> {
+        fun getDemoProjectList(): List<ProjectDetail> {
             return listOf(
                 ProjectDetail(
                     projectName = "Joylada",
                     logo = "https://www.ais.th/joylada/images/logo_app.jpg",
                     teamSize = 28,
-                    projectSummary = context.getString(R.string.lorem),
+                    projectSummary = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     technologyUsed = listOf(
                         "Android",
                         "iOS",
@@ -102,7 +101,7 @@ class DataCenter {
                     projectName = "Powerbuy",
                     logo = "https://scontent.fcnx1-1.fna.fbcdn.net/v/t39.30808-6/227943469_10159559423489697_2674711483060557812_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeGijAaiJIxkuvFu94vZMxjXLx_7VY8iiVAvH_tVjyKJUM4rhZGbmZKGMvu1X76i7PA&_nc_ohc=GpkBjQos-fYAX9QLlYf&_nc_ht=scontent.fcnx1-1.fna&oh=00_AT-DVydw9OWBa28fyu1PkpeUDWAJQyPQFHbNVm5BvB_IXA&oe=62230351",
                     teamSize = 12,
-                    projectSummary = context.getString(R.string.lorem),
+                    projectSummary = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     technologyUsed = listOf(
                         "Android",
                         "iOS",
@@ -119,7 +118,7 @@ class DataCenter {
                     projectName = "Beeber",
                     logo = "https://play-lh.googleusercontent.com/LKZQSflMawlUoOxHjb_lFgjYvHUCijfDDXsAAvUK_04Sq3zgePTYjp7AjcHOae5Fdg",
                     teamSize = 16,
-                    projectSummary = context.getString(R.string.lorem),
+                    projectSummary = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     technologyUsed = listOf(
                         "Android",
                         "iOS",
@@ -138,7 +137,7 @@ class DataCenter {
                     projectName = "Ebuero",
                     logo = "https://play-lh.googleusercontent.com/M2l5N1nM6JjNCTa9hI7N1iBFKoVsNU0oT4sgY6rHyY7-aljCtQCXkX2lRO9s88kXO8k",
                     teamSize = 24,
-                    projectSummary = context.getString(R.string.lorem),
+                    projectSummary = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     technologyUsed = listOf(
                         "Android",
                         "iOS",

@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.testanymind.domain.common.DataCenter
 import com.testanymind.domain.common.Result
 import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.domain.usecase.*
-import com.testanymind.presentation.DataCenter
 import com.testanymind.presentation.base.BaseViewModel
 import com.testanymind.presentation.lifecycle.LiveTrigger
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
@@ -50,12 +50,12 @@ class ProjectViewModel(
         }
     }
 
-    fun save(context: Context) {
+    fun save() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             deleteAllProjectUseCase.invoke()
 
-            val list = DataCenter.getDemoProjectList(context).map { it.toEntity() }
+            val list = DataCenter.getDemoProjectList().map { it.toEntity() }
 
             when (val result = saveProjectUseCase.invoke(list)) {
                 is Result.Success -> {

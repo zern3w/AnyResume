@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.presentation.databinding.ItemProjectBinding
-import com.testanymind.presentation.getCollapseAnimation
-import com.testanymind.presentation.getExpandAnimation
+import com.testanymind.presentation.extension.getCollapseAnimation
+import com.testanymind.presentation.extension.getExpandAnimation
 
 private const val ARROW_ROTATION_DURATION = 200L
 

@@ -3,10 +3,10 @@ package com.testanymind.presentation.feature.workexperience
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.testanymind.domain.common.DataCenter
 import com.testanymind.domain.common.Result
 import com.testanymind.domain.model.WorkingExperience
 import com.testanymind.domain.usecase.*
-import com.testanymind.presentation.DataCenter
 import com.testanymind.presentation.base.BaseViewModel
 import com.testanymind.presentation.lifecycle.LiveTrigger
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger

@@ -3,12 +3,12 @@ package com.testanymind.presentation.feature.education
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.testanymind.domain.common.DataCenter
 import com.testanymind.domain.common.Result
 import com.testanymind.domain.model.Education
 import com.testanymind.domain.usecase.DeleteAllEducationUseCase
 import com.testanymind.domain.usecase.GetEducationUseCase
 import com.testanymind.domain.usecase.SaveEducationUseCase
-import com.testanymind.presentation.DataCenter
 import com.testanymind.presentation.base.BaseViewModel
 import com.testanymind.presentation.lifecycle.LiveTrigger
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
