@@ -25,6 +25,7 @@ class PersonalInfoViewModel(
 
     val name: MutableLiveData<String> = MutableLiveData("")
     val role: MutableLiveData<String> = MutableLiveData("")
+    val careerObjective: MutableLiveData<String> = MutableLiveData("")
     val mobile: MutableLiveData<String> = MutableLiveData("")
     val address: MutableLiveData<String> = MutableLiveData("")
     val email: MutableLiveData<String> = MutableLiveData("")
@@ -32,6 +33,7 @@ class PersonalInfoViewModel(
     private var initialData = PersonalInfoEntity(
         name = "",
         role = "",
+        careerObjective = "",
         avatar = "",
         mobile = "",
         email = "",
@@ -57,6 +59,7 @@ class PersonalInfoViewModel(
                         initialData = it
                         name.value = it.name
                         role.value = it.role
+                        careerObjective.value = it.careerObjective
                         mobile.value = it.mobile
                         address.value = it.address
                         email.value = it.email
@@ -111,6 +114,7 @@ class PersonalInfoViewModel(
     private fun getChangedPersonalInfoEntity() = PersonalInfoEntity(
         name = name.value.orEmpty(),
         role = role.value.orEmpty(),
+        careerObjective = careerObjective.value.orEmpty(),
         avatar = "",
         mobile = mobile.value.orEmpty(),
         email = email.value.orEmpty(),

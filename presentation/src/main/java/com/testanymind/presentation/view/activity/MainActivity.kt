@@ -2,15 +2,17 @@ package com.testanymind.presentation.view.activity
 
 import android.view.Menu
 import android.view.MenuItem
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import com.testanymind.presentation.*
+import com.testanymind.presentation.DataCenter
+import com.testanymind.presentation.R
+import com.testanymind.presentation.addChips
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityMainBinding
 import com.testanymind.presentation.extension.observeEvent
 import com.testanymind.presentation.extension.observeTrigger
+import com.testanymind.presentation.load
 import com.testanymind.presentation.view.EducationAdapter
 import com.testanymind.presentation.view.ProjectAdapter
 import com.testanymind.presentation.view.SkillBottomSheetFragment
@@ -86,6 +88,7 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
             ivAvatar.load(DataCenter.getDemoAvatar())
             tvName.text = DataCenter.getDemoName()
             tvRole.text = DataCenter.getDemoRole()
+            tvCareerObjective.text = DataCenter.getCareerObjective()
 
             viewPersonal.apply {
                 etMobile.setText(DataCenter.getDemoMobile())
@@ -152,7 +155,8 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
     }
 
     private fun showEditSkillBottomSheet() {
-        SkillBottomSheetFragment.newInstance().show(supportFragmentManager, "SkillBottomSheetFragment")
+        SkillBottomSheetFragment.newInstance()
+            .show(supportFragmentManager, "SkillBottomSheetFragment")
     }
 
     private fun showEditExperienceUi() {

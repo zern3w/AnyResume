@@ -33,6 +33,7 @@
 
     <string name="hint_name">Full name</string>
     <string name="hint_role">Role</string>
+    <string name="hint_career_objective">Career Objective</string>
     <string name="hint_add_skill">Add Skill</string>
 
     <string name="error_invalid_email_format">Invalid email format</string>

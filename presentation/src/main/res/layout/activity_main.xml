@@ -12,7 +12,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="320dp"
             android:background="@color/indigo_900"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -48,7 +48,7 @@
             android:id="@+id/nested_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="-190dp"
+            android:layout_marginTop="-240dp"
             android:clipToPadding="false"
             android:scrollbars="none"
             android:scrollingCache="true"
@@ -130,6 +130,14 @@
                         app:srcCompat="@drawable/placeholder_avatar" />
 
                 </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_career_objective"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:textColor="@android:color/white"
+                    tools:text="Development and provision of a platform that provides one-stop support for brand design and planning, production, e-commerce enablement, marketing, and logistics." />
 
                 <include
                     android:id="@+id/view_personal"

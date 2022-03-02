@@ -12,6 +12,7 @@ class DataCenter {
         fun getDemoName() = "Puttipong Tadang"
         fun getDemoRole() = "Android Developer"
         fun getDemoAvatar() = "https://lh3.googleusercontent.com/a-/AOh14GjZKN4nekspOlZpeK_S04JX4hrwkQu4q5VGy9qr=s576-p-rw-no"
+        fun getCareerObjective() = "Obtain an Android Developer position with AnyMind Group that can benefit from extensive knowledge in coding and engineering principles."
 
         fun getDemoMobile() = "099-4799456"
         fun getDemoEmail() = "puttipong@gmail.com"

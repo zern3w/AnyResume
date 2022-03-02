@@ -1,11 +1,8 @@
-package com.testanymind.domain.entity
+package com.testanymind.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.testanymind.domain.model.PersonalInfo
+import com.testanymind.domain.entity.PersonalInfoEntity
 
-@Entity(tableName = "personal_info")
-data class PersonalInfoEntity(
+data class PersonalInfo(
     val name: String,
     val role: String,
     val careerObjective: String,
@@ -14,10 +11,8 @@ data class PersonalInfoEntity(
     val email: String,
     val address: String
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
 
-    fun toPersonalInfo() = PersonalInfo(
+    fun toEntity() = PersonalInfoEntity(
         name = name,
         role = role,
         careerObjective = careerObjective,

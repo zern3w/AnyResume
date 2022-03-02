@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.testanymind.presentation.view.PersonalInfoViewModel" />
@@ -11,7 +12,6 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_name"
+                    app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_person_outline"
                     app:endIconMode="custom"
                     app:endIconTint="@color/colorPrimaryLight">
@@ -58,9 +59,9 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_full_name"
                         android:layout_width="match_parent"
-                        android:text="@={viewModel.name}"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.name}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_smlarge"
                     android:hint="@string/hint_role"
+                    app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_work_outline_24"
                     app:endIconMode="custom"
                     app:endIconTint="@color/colorPrimaryLight">
@@ -77,9 +79,29 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_role"
                         android:layout_width="match_parent"
-                        android:text="@={viewModel.role}"
                         android:layout_height="wrap_content"
-                        android:inputType="textCapWords" />
+                        android:inputType="textCapWords"
+                        android:text="@={viewModel.role}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_smlarge"
+                    android:hint="@string/hint_career_objective"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:endIconDrawable="@drawable/ic_outline_format_quote_24"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/colorPrimaryLight">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_career_objective"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:text="@={viewModel.careerObjective}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_smlarge"
                     android:hint="@string/mobile"
+                    app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_phone_outline"
                     app:endIconMode="custom"
                     app:endIconTint="@color/colorPrimaryLight">
@@ -96,10 +119,10 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_mobile"
                         android:layout_width="match_parent"
-                        android:text="@={viewModel.mobile}"
                         android:layout_height="wrap_content"
+                        android:inputType="phone"
                         android:maxLength="10"
-                        android:inputType="phone" />
+                        android:text="@={viewModel.mobile}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,6 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_smlarge"
                     android:hint="@string/address"
+                    app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_location_outline"
                     app:endIconMode="custom"
                     app:endIconTint="@color/colorPrimaryLight">
@@ -116,33 +140,34 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_address"
                         android:layout_width="match_parent"
-                        android:maxLines="3"
-                        android:text="@={viewModel.address}"
                         android:layout_height="wrap_content"
-                        android:inputType="textPostalAddress" />
+                        android:inputType="textPostalAddress"
+                        android:maxLines="3"
+                        android:text="@={viewModel.address}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_smlarge"
-                    android:id="@+id/text_layout_email"
                     android:hint="@string/email"
+                    app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_email_outline"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/colorPrimaryLight"
                     app:errorEnabled="true"
                     app:errorIconDrawable="@drawable/ic_error"
-                    app:errorIconTint="@color/red_500"
-                    app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:errorIconTint="@color/red_500">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_email"
-                        android:text="@={viewModel.email}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"
+                        android:text="@={viewModel.email}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
