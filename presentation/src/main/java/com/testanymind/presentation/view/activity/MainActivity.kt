@@ -13,6 +13,7 @@ import com.testanymind.presentation.extension.observeEvent
 import com.testanymind.presentation.extension.observeTrigger
 import com.testanymind.presentation.view.EducationAdapter
 import com.testanymind.presentation.view.ProjectAdapter
+import com.testanymind.presentation.view.SkillBottomSheetFragment
 import com.testanymind.presentation.view.WorkingExperienceAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,7 +55,9 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
         initView()
         initListener()
         initDemoData()
-        observeData()
+        initObserver()
+
+        viewModel.toggleEditModeSwitch()
     }
 
     private fun initView() {
@@ -97,7 +100,7 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
         }
     }
 
-    private fun observeData() {
+    private fun initObserver() {
         viewModel.apply {
             observeEvent(toggleEditModeSwitch, ::isEditModeSwitch)
             observeTrigger(showEditPersonalUiEvent) { this@MainActivity.showEditPersonalUi() }
@@ -149,7 +152,7 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
     }
 
     private fun showEditSkillBottomSheet() {
-
+        SkillBottomSheetFragment.newInstance().show(supportFragmentManager, "SkillBottomSheetFragment")
     }
 
     private fun showEditExperienceUi() {

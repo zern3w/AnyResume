@@ -34,5 +34,8 @@
     <string name="hint_name">First Last</string>
     <string name="hint_role">Role</string>
 
+    <string name="hint_add_skill">Add Skill</string>
+
+    <string name="save">Save</string>
 
 </resources>

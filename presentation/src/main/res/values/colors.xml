@@ -44,6 +44,9 @@
     <color name="grey_subtitle">#E8E9ED</color>
     <color name="grey_icon_bg">#f0f0f0</color>
 
+    <color name="grey_eeeeef">#eeeeef</color>
+    <color name="grey_b6b6b6">#b6b6b6</color>
+
 
     <!--Material color list from https://material.io/guidelines/style/color.html-->
 
