@@ -45,13 +45,14 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_personal_info, menu)
+        menuInflater.inflate(R.menu.menu_add_edit, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_save -> viewModel.save()
+            R.id.menu_add -> viewModel.showAddEditUi()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -85,6 +86,10 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
 
             observeTrigger(showConfirmationDiscard) {
                 showConfirmationDiscardDialog()
+            }
+
+            observeTrigger(showAddEditUi) {
+                startActivity(AddEditWorkingExperienceActivity.newIntent(this@WorkingExperienceActivity))
             }
         }
     }

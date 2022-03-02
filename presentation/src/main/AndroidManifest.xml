@@ -29,6 +29,18 @@
             android:name=".view.activity.WorkingExperienceActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".view.activity.AddEditWorkingExperienceActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activity.AddEditProjectActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activity.AddEditEducationActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

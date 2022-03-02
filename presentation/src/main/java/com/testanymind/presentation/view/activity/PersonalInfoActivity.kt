@@ -27,7 +27,7 @@ class PersonalInfoActivity : DataBindingActivity<ActivityPersonalInfoBinding>() 
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_personal_info, menu)
+        menuInflater.inflate(R.menu.menu_save, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -36,6 +36,7 @@ class PersonalInfoActivity : DataBindingActivity<ActivityPersonalInfoBinding>() 
             R.id.menu_save -> viewModel.save()
         }
         return super.onOptionsItemSelected(item)
+
     }
 
     override fun start() {

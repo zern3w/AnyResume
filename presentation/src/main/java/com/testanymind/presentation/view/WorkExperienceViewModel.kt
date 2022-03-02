@@ -32,6 +32,9 @@ class WorkExperienceViewModel(
     private val _showConfirmationDiscard = MutableLiveTrigger()
     val showConfirmationDiscard: LiveTrigger = _showConfirmationDiscard
 
+    private val _showAddEditUi = MutableLiveTrigger()
+    val showAddEditUi: LiveTrigger = _showAddEditUi
+
     fun getWorkingExpList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
@@ -83,4 +86,9 @@ class WorkExperienceViewModel(
     fun finishActivity() {
         _finishActivity.trigger()
     }
+
+    fun showAddEditUi() {
+        _showAddEditUi.trigger()
+    }
+
 }

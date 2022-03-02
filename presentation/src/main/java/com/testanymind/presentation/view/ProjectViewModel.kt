@@ -31,6 +31,9 @@ class ProjectViewModel(
     private val _showConfirmationDiscard = MutableLiveTrigger()
     val showConfirmationDiscard: LiveTrigger = _showConfirmationDiscard
 
+    private val _showAddEditUi = MutableLiveTrigger()
+    val showAddEditUi: LiveTrigger = _showAddEditUi
+
     fun getProject() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
@@ -81,5 +84,9 @@ class ProjectViewModel(
 
     fun finishActivity() {
         _finishActivity.trigger()
+    }
+
+    fun showAddEditUi() {
+        _showAddEditUi.trigger()
     }
 }

@@ -36,6 +36,22 @@
     <string name="hint_career_objective">Career Objective</string>
     <string name="hint_add_skill">Add Skill</string>
 
+    <string name="hint_project_name">Project Name</string>
+    <string name="hint_team_size">Team Size</string>
+    <string name="hint_project_summary">Project Summary</string>
+    <string name="hint_technology_used">Technology Used</string>
+    <string name="hint_add_technology_used">Add Technology Used</string>
+
+    <string name="hint_school_name">School Name</string>
+    <string name="hint_company_name">Company Name</string>
+    <string name="hint_duration">Duration</string>
+    <string name="hint_start_date">Start Date</string>
+    <string name="hint_end_date">End Date</string>
+
+    <string name="hint_class">Class</string>
+    <string name="hint_passing_year">Passing Year</string>
+    <string name="hint_gpa">GPA</string>
+
     <string name="error_invalid_email_format">Invalid email format</string>
 
     <string name="dialog_discard_message">Discard draft?</string>
@@ -44,5 +60,10 @@
     <string name="save">Save</string>
     <string name="discard">Discard</string>
     <string name="cancel">Cancel</string>
+
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+
+    <string name="error_no_item">No Item</string>
 
 </resources>

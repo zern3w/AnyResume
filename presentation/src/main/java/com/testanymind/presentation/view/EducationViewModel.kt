@@ -30,6 +30,9 @@ class EducationViewModel(
     private val _showConfirmationDiscard = MutableLiveTrigger()
     val showConfirmationDiscard: LiveTrigger = _showConfirmationDiscard
 
+    private val _showAddEditUi = MutableLiveTrigger()
+    val showAddEditUi: LiveTrigger = _showAddEditUi
+
     fun getEducations() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
@@ -80,5 +83,9 @@ class EducationViewModel(
 
     fun finishActivity() {
         _finishActivity.trigger()
+    }
+
+    fun showAddEditUi() {
+        _showAddEditUi.trigger()
     }
 }

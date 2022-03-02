@@ -4,55 +4,38 @@ import android.content.Context
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
-import com.testanymind.presentation.databinding.ActivityEducationBinding
-import com.testanymind.presentation.extension.observe
+import com.testanymind.presentation.databinding.ActivityAddEditProjectBinding
+import com.testanymind.presentation.databinding.ActivityAddEditWorkingExperienceBinding
+import com.testanymind.presentation.databinding.ActivityProjectBinding
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.view.EducationAdapter
-import com.testanymind.presentation.view.EducationViewModel
+import com.testanymind.presentation.view.ProjectViewModel
+import com.testanymind.presentation.view.WorkExperienceViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
+class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding>() {
 
-    override fun layoutId() = R.layout.activity_education
+    override fun layoutId() = R.layout.activity_add_edit_project
     override fun getToolBar() = viewBinding.toolbar
 
-    private val viewModel: EducationViewModel by viewModel()
-
-    private val educationAdapter by lazy {
-        EducationAdapter(listOf())
-    }
-
-    private val recyclerViewDivider by lazy {
-        MaterialDividerItemDecoration(
-            this,
-            LinearLayoutManager.VERTICAL
-        ).apply {
-            setDividerColorResource(this@EducationActivity, R.color.grey_divider)
-            dividerInsetStart = resources.getDimensionPixelOffset(R.dimen.spacing_xxxlarge)
-            isLastItemDecorated = false
-        }
-    }
+    private val viewModel: ProjectViewModel by viewModel()
 
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, EducationActivity::class.java)
+            return Intent(context, AddEditProjectActivity::class.java)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_add_edit, menu)
+        menuInflater.inflate(R.menu.menu_save, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_save -> viewModel.save()
-            R.id.menu_add -> viewModel.showAddEditUi()
+//            R.id.menu_save -> viewModel.save()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -61,35 +44,22 @@ class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
         initView()
         initListener()
         initObserver()
-        viewModel.getEducations()
     }
 
     private fun initView() {
-        title = getString(R.string.education)
+        title = "${getString(R.string.add)} ${getString(R.string.project)}"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewBinding.apply {
-            rvEducation.adapter = educationAdapter
-            rvEducation.addItemDecoration(recyclerViewDivider)
-        }
     }
 
     private fun initObserver() {
         viewModel.apply {
-            observe(educationList) {
-                educationAdapter.submitData(it)
-            }
-
             observeTrigger(finishActivity) {
                 finish()
             }
 
             observeTrigger(showConfirmationDiscard) {
                 showConfirmationDiscardDialog()
-            }
-
-            observeTrigger(showAddEditUi) {
-                startActivity(AddEditEducationActivity.newIntent(this@EducationActivity))
             }
         }
     }

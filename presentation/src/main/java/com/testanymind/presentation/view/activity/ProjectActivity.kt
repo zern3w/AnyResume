@@ -12,7 +12,6 @@ import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityProjectBinding
 import com.testanymind.presentation.extension.observe
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.view.EducationAdapter
 import com.testanymind.presentation.view.ProjectAdapter
 import com.testanymind.presentation.view.ProjectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -46,13 +45,14 @@ class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_personal_info, menu)
+        menuInflater.inflate(R.menu.menu_add_edit, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_save -> viewModel.save(this)
+            R.id.menu_add -> viewModel.showAddEditUi()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -87,17 +87,15 @@ class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
             observeTrigger(showConfirmationDiscard) {
                 showConfirmationDiscardDialog()
             }
+
+            observeTrigger(showAddEditUi) {
+                startActivity(AddEditProjectActivity.newIntent(this@ProjectActivity))
+            }
         }
     }
 
     private fun initListener() {
         viewBinding.apply {
-//            ivEdit.setOnClickListener { viewModel.showEditPersonalUi() }
-//            viewPersonal.ivEdit.setOnClickListener { viewModel.showEditPersonalUi() }
-//            viewEducation.ivEdit.setOnClickListener { viewModel.showEditEducationUi() }
-//            viewSkill.ivEdit.setOnClickListener { viewModel.showEditSkillBottomSheet() }
-//            viewExperience.ivEdit.setOnClickListener { viewModel.showEditExperienceUi() }
-//            viewProject.ivEdit.setOnClickListener { viewModel.showEditProjectUi() }
         }
     }
 
