@@ -2,10 +2,12 @@ package com.testanymind.presentation.feature.home
 
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.testanymind.presentation.DataCenter
 import com.testanymind.presentation.R
+import com.testanymind.presentation.addChips
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityMainBinding
 import com.testanymind.presentation.extension.observeEvent
@@ -19,6 +21,7 @@ import com.testanymind.presentation.view.adapter.WorkingExperienceAdapter
 import com.testanymind.presentation.feature.personal.PersonalInfoActivity
 import com.testanymind.presentation.feature.project.ProjectActivity
 import com.testanymind.presentation.feature.workexperience.WorkingExperienceActivity
+import com.testanymind.presentation.load
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : DataBindingActivity<ActivityMainBinding>() {
