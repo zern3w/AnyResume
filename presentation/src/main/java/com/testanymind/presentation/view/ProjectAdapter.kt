@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.presentation.databinding.ItemProjectBinding
 import com.testanymind.presentation.getCollapseAnimation
 import com.testanymind.presentation.getExpandAnimation

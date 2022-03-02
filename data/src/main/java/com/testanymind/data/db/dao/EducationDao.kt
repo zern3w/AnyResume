@@ -13,6 +13,6 @@ interface EducationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(skills: List<EducationEntity>)
 
-    @Delete
-    fun delete(skill: EducationEntity)
+    @Query("DELETE FROM education")
+    fun deleteAll()
 }

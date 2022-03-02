@@ -1,11 +1,8 @@
-package com.testanymind.domain.entity
+package com.testanymind.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.testanymind.domain.model.ProjectDetail
+import com.testanymind.domain.entity.ProjectEntity
 
-@Entity(tableName = "project")
-data class ProjectEntity(
+data class ProjectDetail(
     val projectName: String,
     val logo: String,
     val teamSize: Int,
@@ -13,16 +10,13 @@ data class ProjectEntity(
     val technologyUsed: List<String>,
     val role: String
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
 
-    fun toProject() = ProjectDetail(
+    fun toEntity() = ProjectEntity(
         projectName = projectName,
         logo = logo,
         teamSize = teamSize,
         projectSummary = projectSummary,
         technologyUsed = technologyUsed,
         role = role
-
     )
 }

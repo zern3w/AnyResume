@@ -2,6 +2,7 @@ package com.testanymind.domain.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.testanymind.domain.model.WorkingExperience
 
 @Entity(tableName = "working_experience")
 data class WorkingExperienceEntity(
@@ -13,4 +14,12 @@ data class WorkingExperienceEntity(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+
+    fun toWorkingExperience() = WorkingExperience(
+        companyName = companyName,
+        logo = logo,
+        role = role,
+        startDate = startDate,
+        endDate = endDate
+    )
 }

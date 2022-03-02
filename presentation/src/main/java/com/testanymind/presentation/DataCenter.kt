@@ -1,9 +1,9 @@
 package com.testanymind.presentation
 
 import android.content.Context
-import com.testanymind.presentation.view.Education
-import com.testanymind.presentation.view.ProjectDetail
-import com.testanymind.presentation.view.WorkingExperience
+import com.testanymind.domain.model.Education
+import com.testanymind.domain.model.ProjectDetail
+import com.testanymind.domain.model.WorkingExperience
 
 class DataCenter {
 

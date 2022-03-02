@@ -12,4 +12,15 @@ val useCaseModule = module {
     single { SavePersonalInfoUseCase(get()) }
     single { DeleteAllPersonalInfoUseCase(get()) }
 
+    single { GetEducationUseCase(get()) }
+    single { SaveEducationUseCase(get()) }
+    single { DeleteAllEducationUseCase(get()) }
+
+    single { GetWorkingExperienceUseCase(get()) }
+    single { SaveWorkingExperienceUseCase(get()) }
+    single { DeleteAllWorkingExperienceUseCase(get()) }
+
+    single { GetProjectUseCase(get()) }
+    single { SaveProjectUseCase(get()) }
+    single { DeleteAllProjectUseCase(get()) }
 }

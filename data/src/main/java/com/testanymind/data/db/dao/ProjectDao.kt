@@ -1,6 +1,9 @@
 package com.testanymind.data.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.testanymind.domain.entity.ProjectEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -12,6 +15,6 @@ interface ProjectDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(skills: List<ProjectEntity>)
 
-    @Delete
-     fun delete(skill: ProjectEntity)
+    @Query("DELETE FROM project")
+    fun deleteAll()
 }

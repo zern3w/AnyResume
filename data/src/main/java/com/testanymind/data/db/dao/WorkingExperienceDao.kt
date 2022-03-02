@@ -10,8 +10,8 @@ interface WorkingExperienceDao {
     fun getAll(): Flow<List<WorkingExperienceEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insertAll(skills: List<WorkingExperienceEntity>)
+    fun insertAll(skills: List<WorkingExperienceEntity>)
 
-    @Delete
-     fun delete(skill: WorkingExperienceEntity)
+    @Query("DELETE FROM working_experience")
+    fun deleteAll()
 }

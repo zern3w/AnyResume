@@ -68,6 +68,7 @@ class PersonalInfoActivity : DataBindingActivity<ActivityPersonalInfoBinding>() 
             observeTrigger(finishActivity) {
                 finish()
             }
+
             observeTrigger(showConfirmationDiscard) {
                 showConfirmationDiscardDialog()
             }

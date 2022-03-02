@@ -4,18 +4,39 @@ import android.content.Context
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
-import com.testanymind.presentation.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
-import com.testanymind.presentation.databinding.ActivityEducationBinding
-import com.testanymind.presentation.databinding.ActivityProjectBinding
 import com.testanymind.presentation.databinding.ActivityWorkExperienceBinding
+import com.testanymind.presentation.extension.observe
+import com.testanymind.presentation.extension.observeTrigger
+import com.testanymind.presentation.view.WorkExperienceViewModel
+import com.testanymind.presentation.view.WorkingExperienceAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBinding>() {
 
     override fun layoutId() = R.layout.activity_work_experience
     override fun getToolBar() = viewBinding.toolbar
 
-//    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: WorkExperienceViewModel by viewModel()
+
+    private val workingExperienceAdapter by lazy {
+        WorkingExperienceAdapter(listOf())
+    }
+
+    private val recyclerViewDivider by lazy {
+        MaterialDividerItemDecoration(
+            this,
+            LinearLayoutManager.VERTICAL
+        ).apply {
+            setDividerColorResource(this@WorkingExperienceActivity, R.color.grey_divider)
+            dividerInsetStart = resources.getDimensionPixelOffset(R.dimen.spacing_xxxlarge)
+            isLastItemDecorated = false
+        }
+    }
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -30,7 +51,7 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-//            R.id.menu_save -> viewModel.saveData()
+            R.id.menu_save -> viewModel.save()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -39,6 +60,7 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
         initView()
         initListener()
         initObserver()
+        viewModel.getWorkingExpList()
     }
 
     private fun initView() {
@@ -46,29 +68,41 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewBinding.apply {
-
+            rvExperience.adapter = workingExperienceAdapter
+            rvExperience.addItemDecoration(recyclerViewDivider)
         }
     }
 
     private fun initObserver() {
-//        viewModel.apply {
-//            observeEvent(toggleEditModeSwitch, ::isEditModeSwitch)
-//            observeTrigger(showEditPersonalUiEvent) { this@PersonalInfoActivity.showEditPersonalUi() }
-//            observeTrigger(showEditEducationUiEvent) { this@PersonalInfoActivity.showEditEducationUi() }
-//            observeTrigger(showEditSkillBottomSheetEvent) { this@PersonalInfoActivity.showEditSkillBottomSheet() }
-//            observeTrigger(showEditExperienceUiEvent) { this@PersonalInfoActivity.showEditExperienceUi() }
-//            observeTrigger(showEditProjectUiEvent) { this@PersonalInfoActivity.showEditProjectUi() }
-//        }
+        viewModel.apply {
+            observe(workingExpList) {
+                workingExperienceAdapter.submitData(it)
+            }
+
+            observeTrigger(finishActivity) {
+                finish()
+            }
+
+            observeTrigger(showConfirmationDiscard) {
+                showConfirmationDiscardDialog()
+            }
+        }
     }
 
     private fun initListener() {
         viewBinding.apply {
-//            ivEdit.setOnClickListener { viewModel.showEditPersonalUi() }
-//            viewPersonal.ivEdit.setOnClickListener { viewModel.showEditPersonalUi() }
-//            viewEducation.ivEdit.setOnClickListener { viewModel.showEditEducationUi() }
-//            viewSkill.ivEdit.setOnClickListener { viewModel.showEditSkillBottomSheet() }
-//            viewExperience.ivEdit.setOnClickListener { viewModel.showEditExperienceUi() }
-//            viewProject.ivEdit.setOnClickListener { viewModel.showEditProjectUi() }
         }
+    }
+
+    private fun showConfirmationDiscardDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.confirmation))
+            .setMessage(getString(R.string.dialog_discard_message))
+            .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+            }
+            .setPositiveButton(getString(R.string.discard)) { _, _ ->
+                viewModel.finishActivity()
+            }
+            .show()
     }
 }

@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.testanymind.presentation.view.WorkingExperience" />
+            type="com.testanymind.domain.model.WorkingExperience" />
 
     </data>
 

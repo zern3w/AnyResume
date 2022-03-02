@@ -3,13 +3,14 @@ package com.testanymind.presentation.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.testanymind.domain.model.Education
 import com.testanymind.presentation.databinding.ItemEducationBinding
 
 class EducationAdapter(private var dataList: List<Education>) :
     RecyclerView.Adapter<EducationAdapter.EducationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EducationViewHolder {
-        val binding = ItemEducationBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemEducationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return EducationViewHolder(binding)
     }
 
@@ -36,32 +37,3 @@ class EducationAdapter(private var dataList: List<Education>) :
         }
     }
 }
-
-data class Education(
-    val schoolName: String,
-    val logo: String,
-    val _class: String,
-    val passingYear: String,
-    val gpa: Double
-)
-
-data class WorkingExperience(
-    val companyName: String,
-    val logo: String,
-    val role: String,
-    val startDate: String,
-    val endDate: String
-) {
-    fun getDuration(): String {
-        return "Mar 2017 - Dec 2021"
-    }
-}
-
-data class ProjectDetail(
-    val projectName: String,
-    val logo: String,
-    val teamSize: Int,
-    val projectSummary: String,
-    val technologyUsed: List<String>,
-    val role: String
-)
