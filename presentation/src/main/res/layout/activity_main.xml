@@ -90,15 +90,22 @@
                                 app:fontFamily="sans-serif-medium"
                                 tools:text="Puttipong Tadang" />
 
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/iv_edit"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_gravity="center"
-                                android:layout_marginHorizontal="@dimen/spacing_middle"
-                                android:visibility="gone"
-                                app:srcCompat="@drawable/ic_document_edit"
-                                app:tint="@android:color/white" />
+                            <FrameLayout
+                                android:id="@+id/fl_edit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingHorizontal="@dimen/spacing_middle"
+                                android:visibility="gone">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/iv_edit"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    app:srcCompat="@drawable/ic_document_edit"
+                                    app:tint="@android:color/white" />
+
+                            </FrameLayout>
 
                         </LinearLayout>
 

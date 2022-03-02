@@ -62,6 +62,10 @@ class SkillViewModel(
         _addSkillEvent.setEventValue(skill)
     }
 
+    fun isSkillsEmpty(): Boolean {
+        return _skillList.value.isNullOrEmpty()
+    }
+
     fun initSkills() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
@@ -80,14 +84,6 @@ class SkillViewModel(
                 }
             }
         }
-    }
-
-    fun getSkillsSize(): Int {
-        return _skillList.value?.size ?: 0
-    }
-
-    fun isSkillsEmpty(): Boolean {
-        return _skillList.value.isNullOrEmpty()
     }
 
     fun save() {

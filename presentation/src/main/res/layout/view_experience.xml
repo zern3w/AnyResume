@@ -33,14 +33,22 @@
                     android:textColor="@color/grey_90"
                     android:textStyle="bold" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_edit"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="@dimen/spacing_mlarge"
-                    app:srcCompat="@drawable/ic_document_edit"
-                    android:visibility="gone"
-                    app:tint="@color/grey_700" />
+                <FrameLayout
+                    android:id="@+id/fl_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="@dimen/spacing_mlarge"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_edit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_document_edit"
+                        app:tint="@color/grey_700" />
+
+                </FrameLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_icon"

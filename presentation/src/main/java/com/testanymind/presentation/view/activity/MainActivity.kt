@@ -113,42 +113,42 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
 
     private fun initListener() {
         viewBinding.apply {
-            ivEdit.setOnClickListener { viewModel.showEditPersonalUi() }
-            viewPersonal.ivEdit.setOnClickListener { viewModel.showEditPersonalUi() }
-            viewEducation.ivEdit.setOnClickListener { viewModel.showEditEducationUi() }
-            viewSkill.ivEdit.setOnClickListener { viewModel.showEditSkillBottomSheet() }
-            viewExperience.ivEdit.setOnClickListener { viewModel.showEditExperienceUi() }
-            viewProject.ivEdit.setOnClickListener { viewModel.showEditProjectUi() }
+            flEdit.setOnClickListener { viewModel.showEditPersonalUi() }
+            viewPersonal.flEdit.setOnClickListener { viewModel.showEditPersonalUi() }
+            viewEducation.flEdit.setOnClickListener { viewModel.showEditEducationUi() }
+            viewSkill.flEdit.setOnClickListener { viewModel.showEditSkillBottomSheet() }
+            viewExperience.flEdit.setOnClickListener { viewModel.showEditExperienceUi() }
+            viewProject.flEdit.setOnClickListener { viewModel.showEditProjectUi() }
         }
     }
 
     private fun isEditModeSwitch(edited: Boolean) {
         viewBinding.apply {
-            ivEdit.isVisible = edited
+            flEdit.isVisible = edited
 
-            viewPersonal.ivEdit.isVisible = edited
+            viewPersonal.flEdit.isVisible = edited
             viewPersonal.ivIcon.isVisible = !edited
 
-            viewEducation.ivEdit.isVisible = edited
+            viewEducation.flEdit.isVisible = edited
             viewEducation.ivIcon.isVisible = !edited
 
-            viewSkill.ivEdit.isVisible = edited
+            viewSkill.flEdit.isVisible = edited
             viewSkill.ivIcon.isVisible = !edited
 
-            viewExperience.ivEdit.isVisible = edited
+            viewExperience.flEdit.isVisible = edited
             viewExperience.ivIcon.isVisible = !edited
 
-            viewProject.ivEdit.isVisible = edited
+            viewProject.flEdit.isVisible = edited
             viewProject.ivIcon.isVisible = !edited
         }
     }
 
     private fun showEditPersonalUi() {
-
+        startActivity(PersonalInfoActivity.newIntent(this))
     }
 
     private fun showEditEducationUi() {
-
+        startActivity(EducationActivity.newIntent(this))
     }
 
     private fun showEditSkillBottomSheet() {
@@ -156,10 +156,11 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
     }
 
     private fun showEditExperienceUi() {
+        startActivity(WorkingExperienceActivity.newIntent(this))
 
     }
 
     private fun showEditProjectUi() {
-
+        startActivity(ProjectActivity.newIntent(this))
     }
 }

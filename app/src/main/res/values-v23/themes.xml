@@ -11,7 +11,7 @@
 
         <item name="android:windowBackground">@color/colorAquaHaze</item>
         <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -22,7 +22,7 @@
 
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowBackground">@color/colorAquaHaze</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- End of application theme. -->

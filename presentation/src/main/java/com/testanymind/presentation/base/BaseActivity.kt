@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.testanymind.presentation.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -46,6 +47,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected open fun setUpActionbar(actionBar: ActionBar?) {
-//        actionBar?.setHomeAsUpIndicator(R.drawable.ic_back_black)
+        actionBar?.setHomeAsUpIndicator(R.drawable.ic_chevron_left)
     }
 }

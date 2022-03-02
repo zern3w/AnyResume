@@ -5,12 +5,30 @@
     <application>
         <activity
             android:name=".view.activity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.activity.PersonalInfoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activity.EducationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activity.ProjectActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activity.WorkingExperienceActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
