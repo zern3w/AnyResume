@@ -103,9 +103,8 @@
                 android:text="@{String.valueOf(data.teamSize)}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:textColor="@color/grey_80"
-                app:drawableStartCompat="@drawable/ic_user_group"
+                app:drawableStartCompat="@drawable/ic_outline_groups_24"
                 app:drawableTint="@color/grey_80"
-
                 tools:text="12" />
 
             <com.google.android.material.chip.ChipGroup
