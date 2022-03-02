@@ -62,9 +62,7 @@ class MediatorLiveEvent<T> : MediatorLiveData<Event<T>>() {
     }
 }
 
-class Trigger {
-
-}
+class Trigger
 
 class TriggerObserver(private val onEventUnhandledContent: () -> Unit) : Observer<Trigger> {
     override fun onChanged(event: Trigger?) {
