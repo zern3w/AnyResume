@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view.activity
+package com.testanymind.presentation.feature.education
 
 import android.content.Context
 import android.content.Intent
@@ -12,8 +12,7 @@ import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityEducationBinding
 import com.testanymind.presentation.extension.observe
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.view.EducationAdapter
-import com.testanymind.presentation.view.EducationViewModel
+import com.testanymind.presentation.view.adapter.EducationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {

@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name=".view.activity.MainActivity"
+            android:name=".feature.home.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -14,31 +14,31 @@
         </activity>
 
         <activity
-            android:name=".view.activity.PersonalInfoActivity"
+            android:name=".feature.personal.PersonalInfoActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.activity.EducationActivity"
+            android:name=".feature.education.EducationActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.activity.ProjectActivity"
+            android:name=".feature.project.ProjectActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.activity.WorkingExperienceActivity"
+            android:name=".feature.workexperience.WorkingExperienceActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.activity.AddEditWorkingExperienceActivity"
+            android:name=".feature.workexperience.AddEditWorkingExperienceActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.activity.AddEditProjectActivity"
+            android:name=".feature.project.AddEditProjectActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.activity.AddEditEducationActivity"
+            android:name=".feature.education.AddEditEducationActivity"
             android:screenOrientation="portrait" />
 
     </application>

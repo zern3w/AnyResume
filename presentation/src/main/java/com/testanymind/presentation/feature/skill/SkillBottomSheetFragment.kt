@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view
+package com.testanymind.presentation.feature.skill
 
 import android.app.Dialog
 import android.content.DialogInterface

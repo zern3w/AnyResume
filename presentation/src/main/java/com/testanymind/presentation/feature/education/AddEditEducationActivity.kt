@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view.activity
+package com.testanymind.presentation.feature.education
 
 import android.content.Context
 import android.content.Intent
@@ -8,10 +8,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityAddEditEducationBinding
-import com.testanymind.presentation.databinding.ActivityAddEditWorkingExperienceBinding
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.view.EducationViewModel
-import com.testanymind.presentation.view.WorkExperienceViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddEditEducationActivity : DataBindingActivity<ActivityAddEditEducationBinding>() {

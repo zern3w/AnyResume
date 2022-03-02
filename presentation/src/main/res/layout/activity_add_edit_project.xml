@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.testanymind.presentation.view.PersonalInfoViewModel" />
+            type="com.testanymind.presentation.feature.personal.PersonalInfoViewModel" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

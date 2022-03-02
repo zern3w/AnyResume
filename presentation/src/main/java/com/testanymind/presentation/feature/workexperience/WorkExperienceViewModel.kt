@@ -1,18 +1,14 @@
-package com.testanymind.presentation.view
+package com.testanymind.presentation.feature.workexperience
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.testanymind.domain.common.Result
-import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.domain.model.WorkingExperience
 import com.testanymind.domain.usecase.*
 import com.testanymind.presentation.DataCenter
 import com.testanymind.presentation.base.BaseViewModel
-import com.testanymind.presentation.lifecycle.LiveEvent
 import com.testanymind.presentation.lifecycle.LiveTrigger
-import com.testanymind.presentation.lifecycle.MutableLiveEvent
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

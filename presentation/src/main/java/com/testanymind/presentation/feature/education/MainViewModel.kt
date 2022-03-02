@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view.activity
+package com.testanymind.presentation.feature.education
 
 import androidx.lifecycle.ViewModel
 import com.testanymind.presentation.lifecycle.LiveEvent

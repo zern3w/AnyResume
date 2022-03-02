@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view.activity
+package com.testanymind.presentation.feature.workexperience
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,6 @@ import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityAddEditWorkingExperienceBinding
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.view.WorkExperienceViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWorkingExperienceBinding>() {

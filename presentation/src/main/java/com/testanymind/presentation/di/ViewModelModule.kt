@@ -1,7 +1,11 @@
 package com.testanymind.presentation.di
 
-import com.testanymind.presentation.view.*
-import com.testanymind.presentation.view.activity.MainViewModel
+import com.testanymind.presentation.feature.education.EducationViewModel
+import com.testanymind.presentation.feature.education.MainViewModel
+import com.testanymind.presentation.feature.personal.PersonalInfoViewModel
+import com.testanymind.presentation.feature.project.ProjectViewModel
+import com.testanymind.presentation.feature.skill.SkillViewModel
+import com.testanymind.presentation.feature.workexperience.WorkExperienceViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

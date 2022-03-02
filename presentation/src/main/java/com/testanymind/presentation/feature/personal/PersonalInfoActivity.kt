@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view.activity
+package com.testanymind.presentation.feature.personal
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,6 @@ import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityPersonalInfoBinding
 import com.testanymind.presentation.extension.observeEvent
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.view.PersonalInfoViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PersonalInfoActivity : DataBindingActivity<ActivityPersonalInfoBinding>() {

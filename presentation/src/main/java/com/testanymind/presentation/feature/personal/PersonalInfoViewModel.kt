@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view
+package com.testanymind.presentation.feature.personal
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

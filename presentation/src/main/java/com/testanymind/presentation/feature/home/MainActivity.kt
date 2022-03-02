@@ -1,22 +1,24 @@
-package com.testanymind.presentation.view.activity
+package com.testanymind.presentation.feature.home
 
 import android.view.Menu
 import android.view.MenuItem
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.testanymind.presentation.DataCenter
 import com.testanymind.presentation.R
-import com.testanymind.presentation.addChips
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityMainBinding
 import com.testanymind.presentation.extension.observeEvent
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.load
-import com.testanymind.presentation.view.EducationAdapter
-import com.testanymind.presentation.view.ProjectAdapter
-import com.testanymind.presentation.view.SkillBottomSheetFragment
-import com.testanymind.presentation.view.WorkingExperienceAdapter
+import com.testanymind.presentation.feature.education.EducationActivity
+import com.testanymind.presentation.feature.education.MainViewModel
+import com.testanymind.presentation.view.adapter.EducationAdapter
+import com.testanymind.presentation.view.adapter.ProjectAdapter
+import com.testanymind.presentation.feature.skill.SkillBottomSheetFragment
+import com.testanymind.presentation.view.adapter.WorkingExperienceAdapter
+import com.testanymind.presentation.feature.personal.PersonalInfoActivity
+import com.testanymind.presentation.feature.project.ProjectActivity
+import com.testanymind.presentation.feature.workexperience.WorkingExperienceActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : DataBindingActivity<ActivityMainBinding>() {

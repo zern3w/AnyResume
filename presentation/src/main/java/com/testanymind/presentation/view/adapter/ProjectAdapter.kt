@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view
+package com.testanymind.presentation.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View

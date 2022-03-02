@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view
+package com.testanymind.presentation.feature.project
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -9,9 +9,7 @@ import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.domain.usecase.*
 import com.testanymind.presentation.DataCenter
 import com.testanymind.presentation.base.BaseViewModel
-import com.testanymind.presentation.lifecycle.LiveEvent
 import com.testanymind.presentation.lifecycle.LiveTrigger
-import com.testanymind.presentation.lifecycle.MutableLiveEvent
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

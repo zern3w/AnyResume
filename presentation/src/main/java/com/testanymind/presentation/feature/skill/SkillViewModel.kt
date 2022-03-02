@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view
+package com.testanymind.presentation.feature.skill
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

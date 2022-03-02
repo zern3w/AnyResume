@@ -1,4 +1,4 @@
-package com.testanymind.presentation.view.activity
+package com.testanymind.presentation.feature.project
 
 import android.content.Context
 import android.content.Intent
@@ -12,8 +12,7 @@ import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityProjectBinding
 import com.testanymind.presentation.extension.observe
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.view.ProjectAdapter
-import com.testanymind.presentation.view.ProjectViewModel
+import com.testanymind.presentation.view.adapter.ProjectAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
