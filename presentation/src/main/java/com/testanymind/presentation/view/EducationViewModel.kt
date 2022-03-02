@@ -13,7 +13,7 @@ import com.testanymind.presentation.lifecycle.MutableLiveEvent
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class SkillViewModel(
+class EducationViewModel(
     private val getSkillsUseCase: GetSkillsUseCase,
     private val saveSkillsUserCase: SaveSkillsUseCase,
     private val deleteAllSkillsUseCase: DeleteAllSkillsUseCase,
@@ -22,51 +22,8 @@ class SkillViewModel(
     private val _initSkillsEvent = MutableLiveEvent<MutableList<String>>()
     val initSkillsEvent: LiveEvent<MutableList<String>> = _initSkillsEvent
 
-    private val _addSkillEvent = MutableLiveEvent<String>()
-    val addSkillEvent: LiveEvent<String> = _addSkillEvent
-
     private val _skillList = MutableLiveData<MutableList<String>>(arrayListOf())
     val skillList: LiveData<MutableList<String>> = _skillList
-
-    private val _hasSkill = MutableLiveData<Boolean>()
-    val hasSkill: LiveData<Boolean> = _hasSkill
-
-    fun isContainSkill(skill: String): Boolean {
-        return if (!isSkillsEmpty()) {
-            _skillList.value?.find {
-                it.equals(skill, ignoreCase = true)
-            } != null
-        } else {
-            false
-        }
-    }
-
-    fun removeLastSkill() {
-        if (!isSkillsEmpty()) {
-            _skillList.value = _skillList.value?.apply {
-                removeAt(this.size - 1)
-            }
-        }
-    }
-
-    fun removeSkill(skill: String) {
-        if (!isSkillsEmpty()) {
-            _skillList.value = _skillList.value?.apply {
-                remove(skill)
-            }
-        }
-    }
-
-    fun addSkill(skill: String) {
-        _skillList.value = _skillList.value?.apply {
-            add(skill)
-        }
-        _addSkillEvent.setEventValue(skill)
-    }
-
-    fun isSkillsEmpty(): Boolean {
-        return _skillList.value.isNullOrEmpty()
-    }
 
     fun initSkills() {
         viewModelScope.launch {

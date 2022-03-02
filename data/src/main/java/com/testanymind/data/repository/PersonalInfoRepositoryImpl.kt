@@ -2,35 +2,35 @@ package com.testanymind.data.repository
 
 import com.testanymind.data.db.AnyResumeDatabase
 import com.testanymind.domain.common.Result
-import com.testanymind.domain.entity.SkillEntity
-import com.testanymind.domain.repository.SkillRepository
+import com.testanymind.domain.entity.PersonalInfoEntity
+import com.testanymind.domain.repository.PersonalInfoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SkillRepositoryImpl(
+class PersonalInfoRepositoryImpl(
     private val db: AnyResumeDatabase
-) : SkillRepository {
+) : PersonalInfoRepository {
 
-    override suspend fun getSkills() = withContext(Dispatchers.IO) {
+    override suspend fun getPersonalInfo() = withContext(Dispatchers.IO) {
         try {
-            return@withContext Result.Success(db.skillDao().getAll())
+            return@withContext Result.Success(db.personalInfoDao().get())
         } catch (e: Exception) {
             return@withContext Result.Error(e)
         }
     }
 
-    override suspend fun saveSkills(list: List<String>) = withContext(Dispatchers.IO) {
+    override suspend fun savePersonalInfo(info: PersonalInfoEntity) = withContext(Dispatchers.IO) {
         try {
-            db.skillDao().insertAll(list.map { SkillEntity.fromString(it) })
+            db.personalInfoDao().insert(info)
             return@withContext Result.Success(Unit)
         } catch (e: Exception) {
             return@withContext Result.Error(e)
         }
     }
 
-    override suspend fun deleteAll() = withContext(Dispatchers.IO) {
+    override suspend fun deletePersonalInfo() = withContext(Dispatchers.IO) {
         try {
-            db.skillDao().deleteAll()
+            db.personalInfoDao().deleteAll()
             return@withContext Result.Success(Unit)
         } catch (e: Exception) {
             return@withContext Result.Error(e)

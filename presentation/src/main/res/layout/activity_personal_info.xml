@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.testanymind.presentation.view.PersonalInfoViewModel" />
+    </data>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,8 +56,30 @@
                     app:endIconTint="@color/colorPrimaryLight">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_full_name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:text="@={viewModel.name}"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_smlarge"
+                    android:hint="@string/hint_role"
+                    app:endIconDrawable="@drawable/ic_outline_work_outline_24"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/colorPrimaryLight">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_role"
+                        android:layout_width="match_parent"
+                        android:text="@={viewModel.role}"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,8 +94,12 @@
                     app:endIconTint="@color/colorPrimaryLight">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_mobile"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:text="@={viewModel.mobile}"
+                        android:layout_height="wrap_content"
+                        android:maxLength="10"
+                        android:inputType="phone" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,8 +114,12 @@
                     app:endIconTint="@color/colorPrimaryLight">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_address"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:maxLines="3"
+                        android:text="@={viewModel.address}"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPostalAddress" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,14 +128,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_smlarge"
+                    android:id="@+id/text_layout_email"
                     android:hint="@string/email"
                     app:endIconDrawable="@drawable/ic_email_outline"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
                     app:endIconMode="custom"
                     app:endIconTint="@color/colorPrimaryLight">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:text="@={viewModel.email}"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
