@@ -1,0 +1,10 @@
+// TODO: App icon
+
+// TODO: refactor: Dependencies version
+// TODO: refactor: Gradle Kotlin DSL
+// TODO: refactor: Jetpack Navigation, Single Activity
+// TODO: refactor: Base Recycler View Edit Class
+
+// TODO: feat: Recycler View Sorting in Edit Mode
+// TODO: feat: Generate PDF
+// TODO: feat: Add image icon
