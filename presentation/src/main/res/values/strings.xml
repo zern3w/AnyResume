@@ -59,6 +59,8 @@
 
     <string name="dialog_discard_message">Discard draft?</string>
 
+    <string name="helper_require">*required</string>
+
     <string name="confirmation">Confirmation</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
@@ -67,7 +69,5 @@
 
     <string name="add">Add</string>
     <string name="edit">Edit</string>
-
-    <string name="helper_require">*required</string>
 
 </resources>

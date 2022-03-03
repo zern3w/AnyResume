@@ -8,7 +8,9 @@ import com.testanymind.domain.common.Result
 import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.domain.usecase.*
 import com.testanymind.presentation.base.BaseViewModel
+import com.testanymind.presentation.lifecycle.LiveEvent
 import com.testanymind.presentation.lifecycle.LiveTrigger
+import com.testanymind.presentation.lifecycle.MutableLiveEvent
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,6 +33,9 @@ class ProjectViewModel(
     private val _showAddEditUi = MutableLiveTrigger()
     val showAddEditUi: LiveTrigger = _showAddEditUi
 
+    private val _showOrHideEmptyState = MutableLiveEvent<Boolean>()
+    val showOrHideEmptyState: LiveEvent<Boolean> = _showOrHideEmptyState
+
     fun getProjectList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
@@ -38,7 +43,9 @@ class ProjectViewModel(
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
-                        _projectList.value = list.map { it.toProject() }
+                        val projectList = list.map { it.toProject() }
+                        _projectList.value = projectList
+                        _showOrHideEmptyState.setEventValue(projectList.isEmpty())
                     }
                 }
                 is Result.Error -> {

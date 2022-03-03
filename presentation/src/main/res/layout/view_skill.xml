@@ -64,6 +64,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
 
+            <FrameLayout
+                android:id="@+id/rl_empty"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/view_empty_state"
+                    layout="@layout/view_empty_state" />
+
+            </FrameLayout>
+
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group_skill"
                 android:layout_width="wrap_content"

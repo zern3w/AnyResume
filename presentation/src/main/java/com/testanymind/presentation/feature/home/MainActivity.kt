@@ -6,20 +6,20 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import com.testanymind.domain.common.DataCenter
 import com.testanymind.domain.model.PersonalInfo
+import com.testanymind.domain.model.SectionEmptyState
 import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityMainBinding
 import com.testanymind.presentation.extension.*
 import com.testanymind.presentation.feature.education.EducationActivity
-import com.testanymind.presentation.view.adapter.EducationAdapter
-import com.testanymind.presentation.view.adapter.ProjectAdapter
-import com.testanymind.presentation.feature.skill.SkillBottomSheetFragment
-import com.testanymind.presentation.view.adapter.WorkingExperienceAdapter
 import com.testanymind.presentation.feature.personal.PersonalInfoActivity
 import com.testanymind.presentation.feature.project.ProjectActivity
+import com.testanymind.presentation.feature.skill.SkillBottomSheetFragment
 import com.testanymind.presentation.feature.workexperience.WorkingExperienceActivity
+import com.testanymind.presentation.view.adapter.EducationAdapter
+import com.testanymind.presentation.view.adapter.ProjectAdapter
+import com.testanymind.presentation.view.adapter.WorkingExperienceAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : DataBindingActivity<ActivityMainBinding>() {
@@ -105,6 +105,7 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
                 }
             }
 
+            observeEvent(showOrHideEmptyState, ::showOrHideEmptyState)
             observeEvent(toggleEditModeSwitch, ::isEditModeSwitch)
             observeTrigger(showEditPersonalUiEvent) { this@MainActivity.showEditPersonalUi() }
             observeTrigger(showEditEducationUiEvent) { this@MainActivity.showEditEducationUi() }
@@ -156,7 +157,8 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
             }
             tvName.text = info.name.ifEmpty { getString(R.string.hint_name) }
             tvRole.text = info.role.ifEmpty { getString(R.string.hint_role) }
-            tvCareerObjective.text = info.careerObjective.ifEmpty { getString(R.string.hint_career_objective) }
+            tvCareerObjective.text =
+                info.careerObjective.ifEmpty { getString(R.string.hint_career_objective) }
 
             viewPersonal.apply {
                 etMobile.setText(info.mobile)
@@ -186,5 +188,22 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
 
     private fun showEditProjectUi() {
         startActivity(ProjectActivity.newIntent(this))
+    }
+
+    private fun showOrHideEmptyState(data: SectionEmptyState) {
+        when (data.sectionTypeId) {
+            SectionEmptyState.SECTION_EDUCATION -> {
+                viewBinding.viewEducation.rlEmpty.isVisible = data.isEmpty
+            }
+            SectionEmptyState.SECTION_SKILL -> {
+                viewBinding.viewSkill.rlEmpty.isVisible = data.isEmpty
+            }
+            SectionEmptyState.SECTION_EXPERIENCE -> {
+                viewBinding.viewExperience.rlEmpty.isVisible = data.isEmpty
+            }
+            SectionEmptyState.SECTION_PROJECT -> {
+                viewBinding.viewProject.rlEmpty.isVisible = data.isEmpty
+            }
+        }
     }
 }

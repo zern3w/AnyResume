@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -13,6 +14,7 @@ import com.testanymind.presentation.*
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityProjectBinding
 import com.testanymind.presentation.extension.observe
+import com.testanymind.presentation.extension.observeEvent
 import com.testanymind.presentation.extension.observeTrigger
 import com.testanymind.presentation.feature.education.AddEditEducationActivity
 import com.testanymind.presentation.view.adapter.ProjectAdapter
@@ -79,6 +81,10 @@ class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
         viewModel.apply {
             observe(projectList) {
                 projectAdapter.submitData(it)
+            }
+
+            observeEvent(showOrHideEmptyState) {
+                viewBinding.viewEmptyState.root.isVisible = it
             }
 
             observeTrigger(finishActivity) {

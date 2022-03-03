@@ -53,6 +53,9 @@ class MainViewModel(
     private val _showEditProjectUiEvent = MutableLiveTrigger()
     val showEditProjectUiEvent: LiveTrigger = _showEditProjectUiEvent
 
+    private val _showOrHideEmptyState = MutableLiveEvent<SectionEmptyState>()
+    val showOrHideEmptyState: LiveEvent<SectionEmptyState> = _showOrHideEmptyState
+
     private val _toggleEditModeSwitch = MutableLiveEvent<Boolean>()
     val toggleEditModeSwitch: LiveEvent<Boolean> = _toggleEditModeSwitch
 
@@ -92,7 +95,14 @@ class MainViewModel(
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
-                        _educationList.value = list.map { it.toEducation() }
+                        val educationList = list.map { it.toEducation() }
+                        _educationList.value = educationList
+                        _showOrHideEmptyState.setEventValue(
+                            SectionEmptyState(
+                                SectionEmptyState.SECTION_EDUCATION,
+                                educationList.isEmpty()
+                            )
+                        )
                     }
                 }
                 is Result.Error -> {
@@ -110,7 +120,14 @@ class MainViewModel(
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
-                        _skillList.value = list.map { it.toSkill() }
+                        val skillList = list.map { it.toSkill() }
+                        _skillList.value = skillList
+                        _showOrHideEmptyState.setEventValue(
+                            SectionEmptyState(
+                                SectionEmptyState.SECTION_SKILL,
+                                skillList.isEmpty()
+                            )
+                        )
                     }
                 }
                 is Result.Error -> {
@@ -128,7 +145,14 @@ class MainViewModel(
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
-                        _workingExpList.value = list.map { it.toWorkingExperience() }
+                        val workingExpList = list.map { it.toWorkingExperience() }
+                        _workingExpList.value = workingExpList
+                        _showOrHideEmptyState.setEventValue(
+                            SectionEmptyState(
+                                SectionEmptyState.SECTION_EXPERIENCE,
+                                workingExpList.isEmpty()
+                            )
+                        )
                     }
                 }
                 is Result.Error -> {
@@ -146,7 +170,15 @@ class MainViewModel(
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
-                        _projectList.value = list.map { it.toProject() }
+                        val projectList = list.map { it.toProject() }
+                        _projectList.value = projectList
+                        _showOrHideEmptyState.setEventValue(
+                            SectionEmptyState(
+                                SectionEmptyState.SECTION_PROJECT,
+                                projectList.isEmpty()
+                            )
+                        )
+
                     }
                 }
                 is Result.Error -> {

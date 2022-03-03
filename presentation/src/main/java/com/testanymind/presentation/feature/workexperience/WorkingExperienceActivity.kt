@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -12,6 +13,7 @@ import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityWorkExperienceBinding
 import com.testanymind.presentation.extension.observe
+import com.testanymind.presentation.extension.observeEvent
 import com.testanymind.presentation.extension.observeTrigger
 import com.testanymind.presentation.view.adapter.WorkingExperienceAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -77,6 +79,10 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
         viewModel.apply {
             observe(workingExpList) {
                 workingExperienceAdapter.submitData(it)
+            }
+
+            observeEvent(showOrHideEmptyState) {
+                viewBinding.viewEmptyState.root.isVisible = it
             }
 
             observeTrigger(finishActivity) {

@@ -8,7 +8,9 @@ import com.testanymind.domain.common.Result
 import com.testanymind.domain.model.WorkingExperience
 import com.testanymind.domain.usecase.*
 import com.testanymind.presentation.base.BaseViewModel
+import com.testanymind.presentation.lifecycle.LiveEvent
 import com.testanymind.presentation.lifecycle.LiveTrigger
+import com.testanymind.presentation.lifecycle.MutableLiveEvent
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,6 +33,9 @@ class WorkExperienceViewModel(
     private val _showAddEditUi = MutableLiveTrigger()
     val showAddEditUi: LiveTrigger = _showAddEditUi
 
+    private val _showOrHideEmptyState = MutableLiveEvent<Boolean>()
+    val showOrHideEmptyState: LiveEvent<Boolean> = _showOrHideEmptyState
+
     fun getWorkingExpList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
@@ -38,7 +43,9 @@ class WorkExperienceViewModel(
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
-                        _workingExpList.value = list.map { it.toWorkingExperience() }
+                        val workingExpList = list.map { it.toWorkingExperience() }
+                        _workingExpList.value = workingExpList
+                        _showOrHideEmptyState.setEventValue(workingExpList.isEmpty())
                     }
                 }
                 is Result.Error -> {
