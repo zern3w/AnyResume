@@ -135,6 +135,7 @@
                     android:id="@+id/tv_career_objective"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/career_objective"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:textColor="@android:color/white"
                     tools:text="Development and provision of a platform that provides one-stop support for brand design and planning, production, e-commerce enablement, marketing, and logistics." />

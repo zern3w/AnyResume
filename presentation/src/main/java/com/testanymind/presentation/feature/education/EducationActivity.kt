@@ -60,7 +60,7 @@ class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
         initView()
         initListener()
         initObserver()
-        viewModel.getEducations()
+        viewModel.getEducationList()
     }
 
     private fun initView() {

@@ -33,7 +33,7 @@ class EducationViewModel(
     private val _showAddEditUi = MutableLiveTrigger()
     val showAddEditUi: LiveTrigger = _showAddEditUi
 
-    fun getEducations() {
+    fun getEducationList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             when (val result = getEducationUseCase.invoke()) {

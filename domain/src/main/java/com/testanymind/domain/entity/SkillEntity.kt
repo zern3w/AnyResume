@@ -2,6 +2,7 @@ package com.testanymind.domain.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.testanymind.domain.model.Skill
 
 @Entity(tableName = "skill")
 data class SkillEntity(
@@ -10,9 +11,6 @@ data class SkillEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 
-    companion object {
-        fun fromString(s: String): SkillEntity {
-            return SkillEntity(s)
-        }
-    }
+    fun toSkill() = Skill(skill = skill)
+
 }

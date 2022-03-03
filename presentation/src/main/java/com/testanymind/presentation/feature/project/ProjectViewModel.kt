@@ -32,7 +32,7 @@ class ProjectViewModel(
     private val _showAddEditUi = MutableLiveTrigger()
     val showAddEditUi: LiveTrigger = _showAddEditUi
 
-    fun getProject() {
+    fun getProjectList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             when (val result = getProjectUseCase.invoke()) {

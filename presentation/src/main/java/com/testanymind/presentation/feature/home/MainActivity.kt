@@ -6,14 +6,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.testanymind.domain.common.DataCenter
+import com.testanymind.domain.model.PersonalInfo
 import com.testanymind.presentation.R
-import com.testanymind.presentation.extension.addChips
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityMainBinding
-import com.testanymind.presentation.extension.observeEvent
-import com.testanymind.presentation.extension.observeTrigger
+import com.testanymind.presentation.extension.*
 import com.testanymind.presentation.feature.education.EducationActivity
-import com.testanymind.presentation.feature.education.MainViewModel
 import com.testanymind.presentation.view.adapter.EducationAdapter
 import com.testanymind.presentation.view.adapter.ProjectAdapter
 import com.testanymind.presentation.feature.skill.SkillBottomSheetFragment
@@ -21,7 +19,6 @@ import com.testanymind.presentation.view.adapter.WorkingExperienceAdapter
 import com.testanymind.presentation.feature.personal.PersonalInfoActivity
 import com.testanymind.presentation.feature.project.ProjectActivity
 import com.testanymind.presentation.feature.workexperience.WorkingExperienceActivity
-import com.testanymind.presentation.extension.load
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : DataBindingActivity<ActivityMainBinding>() {
@@ -61,10 +58,19 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
     override fun start() {
         initView()
         initListener()
-        initDemoData()
         initObserver()
 
-        viewModel.toggleEditModeSwitch()
+        viewModel.apply {
+            getPersonalInfo()
+            getEducationList()
+            getSkillList()
+            getWorkingExpList()
+            getProjectList()
+
+            // for testing
+//            getDemoData()
+            toggleEditModeSwitch()
+        }
     }
 
     private fun initView() {
@@ -88,28 +94,16 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
         }
     }
 
-    private fun initDemoData() {
-        viewBinding.apply {
-            ivAvatar.load(DataCenter.getDemoAvatar())
-            tvName.text = DataCenter.getDemoName()
-            tvRole.text = DataCenter.getDemoRole()
-            tvCareerObjective.text = DataCenter.getCareerObjective()
-
-            viewPersonal.apply {
-                etMobile.setText(DataCenter.getDemoMobile())
-                etEmail.setText(DataCenter.getDemoEmail())
-                etAddress.setText(DataCenter.getDemoAddress())
-            }
-
-            educationAdapter.submitData(DataCenter.getDemoEducationList())
-            viewSkill.chipGroupSkill.addChips(DataCenter.getDemoSkillList())
-            workingExperienceAdapter.submitData(DataCenter.getDemoWorkingExperienceList())
-            projectAdapter.submitData(DataCenter.getDemoProjectList())
-        }
-    }
-
     private fun initObserver() {
         viewModel.apply {
+            observe(personalInfo, ::setupPersonalInfoView)
+            observe(educationList, educationAdapter::submitData)
+            observe(workingExpList, workingExperienceAdapter::submitData)
+            observe(projectList, projectAdapter::submitData)
+            observe(skillList) { list ->
+                viewBinding.viewSkill.chipGroupSkill.addChips(list.map { it.skill })
+            }
+
             observeEvent(toggleEditModeSwitch, ::isEditModeSwitch)
             observeTrigger(showEditPersonalUiEvent) { this@MainActivity.showEditPersonalUi() }
             observeTrigger(showEditEducationUiEvent) { this@MainActivity.showEditEducationUi() }
@@ -148,6 +142,21 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
 
             viewProject.flEdit.isVisible = edited
             viewProject.ivIcon.isVisible = !edited
+        }
+    }
+
+    private fun setupPersonalInfoView(info: PersonalInfo) {
+        viewBinding.apply {
+            ivAvatar.load(info.avatar)
+            tvName.text = info.name
+            tvRole.text = info.role
+            tvCareerObjective.text = info.careerObjective
+
+            viewPersonal.apply {
+                etMobile.setText(info.mobile)
+                etEmail.setText(info.email)
+                etAddress.setText(info.address)
+            }
         }
     }
 

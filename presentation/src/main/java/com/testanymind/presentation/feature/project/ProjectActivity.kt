@@ -60,7 +60,7 @@ class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
         initView()
         initListener()
         initObserver()
-        viewModel.getProject()
+        viewModel.getProjectList()
     }
 
     private fun initView() {

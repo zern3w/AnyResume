@@ -1,22 +1,20 @@
 package com.testanymind.domain.common
 
-import com.testanymind.domain.model.Education
-import com.testanymind.domain.model.ProjectDetail
-import com.testanymind.domain.model.WorkingExperience
+import com.testanymind.domain.model.*
 
 class DataCenter {
 
     companion object {
 
-        fun getDemoName() = "Puttipong Tadang"
-        fun getDemoRole() = "Android Developer"
-        fun getDemoAvatar() = "https://lh3.googleusercontent.com/a-/AOh14GjZKN4nekspOlZpeK_S04JX4hrwkQu4q5VGy9qr=s576-p-rw-no"
-        fun getCareerObjective() = "Obtain an Android Developer position with AnyMind Group that can benefit from extensive knowledge in coding and engineering principles."
-
-        fun getDemoMobile() = "099-4799456"
-        fun getDemoEmail() = "puttipong@gmail.com"
-        fun getDemoAddress() =
-            "50/7 Village No.1 Padat Sub-district, Muang District, Chiang Mai, 50100"
+        fun getPersonalInfo() = PersonalInfo(
+            name = "Puttipong Tadang",
+            role = "Android Developer",
+            careerObjective = "Obtain an Android Developer position with AnyMind Group that can benefit from extensive knowledge in coding and engineering principles.",
+            avatar = "https://lh3.googleusercontent.com/a-/AOh14GjZKN4nekspOlZpeK_S04JX4hrwkQu4q5VGy9qr=s576-p-rw-no",
+            mobile = "099-4799456",
+            email = "puttipong@gmail.com",
+            address = "50/7 Village No.1 Padat Sub-district, Muang District, Chiang Mai, 50100"
+        )
 
         fun getDemoEducationList(): List<Education> {
             return listOf(
@@ -37,16 +35,16 @@ class DataCenter {
             )
         }
 
-        fun getDemoSkillList(): List<String> {
+        fun getDemoSkillList(): List<Skill> {
             return listOf(
-                "Android",
-                "Kotlin",
-                "Firebase",
-                "Java",
-                "Golang",
-                "Retrofit",
-                "Koin",
-                "Jetpack"
+                Skill("Android"),
+                Skill("Kotlin"),
+                Skill("Firebase"),
+                Skill("Java"),
+                Skill("Golang"),
+                Skill("Retrofit"),
+                Skill("Koin"),
+                Skill("Jetpack")
             )
         }
 

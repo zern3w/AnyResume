@@ -8,7 +8,7 @@ interface SkillRepository {
 
     suspend fun getSkills(): Result<Flow<List<SkillEntity>>>
 
-    suspend fun saveSkills(list: List<String>): Result<Unit>
+    suspend fun saveSkills(list: List<SkillEntity>): Result<Unit>
 
     suspend fun deleteAll(): Result<Unit>
 

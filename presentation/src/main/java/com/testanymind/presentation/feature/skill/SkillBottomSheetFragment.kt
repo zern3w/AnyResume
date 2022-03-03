@@ -37,7 +37,7 @@ class SkillBottomSheetFragment : DataBindingBottomSheetDialogFragment<FragmentSk
     override fun start() {
         initView()
         initObserver()
-        viewModel.initSkills()
+        viewModel.getSkillList()
     }
 
     override fun onDismiss(dialog: DialogInterface) {
@@ -83,7 +83,7 @@ class SkillBottomSheetFragment : DataBindingBottomSheetDialogFragment<FragmentSk
             observeEvent(addSkillEvent, ::addChipToGroup)
             observeEvent(initSkillsEvent) {
                 for (skill in it) {
-                    addChipToGroup(skill)
+                    addChipToGroup(skill.skill)
                 }
             }
         }

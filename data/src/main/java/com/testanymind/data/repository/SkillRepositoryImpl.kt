@@ -19,9 +19,9 @@ class SkillRepositoryImpl(
         }
     }
 
-    override suspend fun saveSkills(list: List<String>) = withContext(Dispatchers.IO) {
+    override suspend fun saveSkills(list: List<SkillEntity>) = withContext(Dispatchers.IO) {
         try {
-            db.skillDao().insertAll(list.map { SkillEntity.fromString(it) })
+            db.skillDao().insertAll(list)
             return@withContext Result.Success(Unit)
         } catch (e: Exception) {
             return@withContext Result.Error(e)

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.testanymind.domain.common.Result
+import com.testanymind.domain.model.Skill
 import com.testanymind.domain.usecase.DeleteAllSkillsUseCase
 import com.testanymind.domain.usecase.GetSkillsUseCase
 import com.testanymind.domain.usecase.SaveSkillsUseCase
@@ -19,14 +20,14 @@ class SkillViewModel(
     private val deleteAllSkillsUseCase: DeleteAllSkillsUseCase,
 ) : BaseViewModel() {
 
-    private val _initSkillsEvent = MutableLiveEvent<MutableList<String>>()
-    val initSkillsEvent: LiveEvent<MutableList<String>> = _initSkillsEvent
+    private val _initSkillsEvent = MutableLiveEvent<MutableList<Skill>>()
+    val initSkillsEvent: LiveEvent<MutableList<Skill>> = _initSkillsEvent
 
     private val _addSkillEvent = MutableLiveEvent<String>()
     val addSkillEvent: LiveEvent<String> = _addSkillEvent
 
-    private val _skillList = MutableLiveData<MutableList<String>>(arrayListOf())
-    val skillList: LiveData<MutableList<String>> = _skillList
+    private val _skillList = MutableLiveData<MutableList<Skill>>(arrayListOf())
+    val skillList: LiveData<MutableList<Skill>> = _skillList
 
     private val _hasSkill = MutableLiveData<Boolean>()
     val hasSkill: LiveData<Boolean> = _hasSkill
@@ -34,7 +35,7 @@ class SkillViewModel(
     fun isContainSkill(skill: String): Boolean {
         return if (!isSkillsEmpty()) {
             _skillList.value?.find {
-                it.equals(skill, ignoreCase = true)
+                it.skill.equals(skill, ignoreCase = true)
             } != null
         } else {
             false
@@ -52,14 +53,14 @@ class SkillViewModel(
     fun removeSkill(skill: String) {
         if (!isSkillsEmpty()) {
             _skillList.value = _skillList.value?.apply {
-                remove(skill)
+                remove(Skill(skill))
             }
         }
     }
 
     fun addSkill(skill: String) {
         _skillList.value = _skillList.value?.apply {
-            add(skill)
+            add(Skill(skill))
         }
         _addSkillEvent.setEventValue(skill)
     }
@@ -68,14 +69,14 @@ class SkillViewModel(
         return _skillList.value.isNullOrEmpty()
     }
 
-    fun initSkills() {
+    fun getSkillList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             when (val result = getSkillsUseCase.invoke()) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
-                        val skills = list.map { it.skill }.toMutableList()
+                        val skills = list.map { it.toSkill() }.toMutableList()
                         _skillList.value = skills
                         _initSkillsEvent.setEventValue(skills)
                     }
@@ -94,7 +95,7 @@ class SkillViewModel(
             skillList.value?.let { list ->
                 deleteAllSkillsUseCase.invoke()
 
-                when (val result = saveSkillsUserCase.invoke(list)) {
+                when (val result = saveSkillsUserCase.invoke(list.map { it.toEntity() })) {
                     is Result.Success -> {
                         _dataLoading.postValue(false)
                     }
