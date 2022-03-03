@@ -16,6 +16,7 @@ data class WorkingExperienceEntity(
     var id: Int = 0
 
     fun toWorkingExperience() = WorkingExperience(
+        _id = id,
         companyName = companyName,
         logo = logo,
         role = role,

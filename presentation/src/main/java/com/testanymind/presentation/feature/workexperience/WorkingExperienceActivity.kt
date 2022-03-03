@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.testanymind.domain.model.WorkingExperience
 import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityWorkExperienceBinding
@@ -23,7 +24,7 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
     private val viewModel: WorkExperienceViewModel by viewModel()
 
     private val workingExperienceAdapter by lazy {
-        WorkingExperienceAdapter(listOf())
+        WorkingExperienceAdapter(listOf(), ::onItemClick)
     }
 
     private val recyclerViewDivider by lazy {
@@ -108,5 +109,9 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
                 viewModel.finishActivity()
             }
             .show()
+    }
+
+    private fun onItemClick(data: WorkingExperience) {
+        startActivity(AddEditWorkingExperienceActivity.newIntent(this@WorkingExperienceActivity, data._id))
     }
 }

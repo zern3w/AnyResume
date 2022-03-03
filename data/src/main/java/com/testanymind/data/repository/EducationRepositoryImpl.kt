@@ -44,7 +44,7 @@ class EducationRepositoryImpl(
             }
         }
 
-    override suspend fun updateEducation(data: EducationEntity)= withContext(Dispatchers.IO) {
+    override suspend fun updateEducation(data: EducationEntity) = withContext(Dispatchers.IO) {
         try {
             return@withContext Result.Success(db.educationDao().update(data))
         } catch (e: Exception) {

@@ -161,11 +161,11 @@ class AddEditEducationActivity : DataBindingActivity<ActivityAddEditEducationBin
     }
 
     override fun onBackPressed() {
-        if (!viewBinding.etSchoolName.text.isNullOrEmpty() ||
+        if ((!viewBinding.etSchoolName.text.isNullOrEmpty() ||
             !viewBinding.etClassName.text.isNullOrEmpty() ||
             !viewBinding.etPassingYear.text.isNullOrEmpty() ||
-            !viewBinding.etGpa.text.isNullOrEmpty() ||
-                    educationId != CREATE_MODE
+            !viewBinding.etGpa.text.isNullOrEmpty()) &&
+                    educationId == CREATE_MODE
         ) {
             viewModel.showConfirmationDiscard()
         } else {

@@ -6,6 +6,7 @@ import com.testanymind.presentation.feature.home.MainViewModel
 import com.testanymind.presentation.feature.personal.PersonalInfoViewModel
 import com.testanymind.presentation.feature.project.ProjectViewModel
 import com.testanymind.presentation.feature.skill.SkillViewModel
+import com.testanymind.presentation.feature.workexperience.AddEditWorkExperienceViewModel
 import com.testanymind.presentation.feature.workexperience.WorkExperienceViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -19,5 +20,6 @@ val viewModelModules = module {
     viewModel { PersonalInfoViewModel(get(), get(), get()) }
     viewModel { WorkExperienceViewModel(get(), get(), get()) }
     viewModel { ProjectViewModel(get(), get(), get()) }
+    viewModel { AddEditWorkExperienceViewModel(get(), get(), get(), get()) }
 
 }

@@ -20,6 +20,9 @@ interface WorkingExperienceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(workExps: List<WorkingExperienceEntity>)
 
+    @Update
+    fun update(education: WorkingExperienceEntity)
+
     @Query("DELETE FROM working_experience WHERE id=:id")
     fun deleteById(id: Int)
 

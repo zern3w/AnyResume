@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class WorkExperienceViewModel(
-    private val getWorkingExperienceUseCase: GetWorkingExperienceUseCase,
+    private val getAllWorkingExperienceUseCase: GetAllWorkingExperienceUseCase,
     private val saveWorkingExperienceUseCase: SaveWorkingExperienceUseCase,
     private val deleteAllWorkingExperienceUseCase: DeleteAllWorkingExperienceUseCase,
 ) : BaseViewModel() {
@@ -34,7 +34,7 @@ class WorkExperienceViewModel(
     fun getWorkingExpList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            when (val result = getWorkingExperienceUseCase.invoke()) {
+            when (val result = getAllWorkingExperienceUseCase.invoke()) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
@@ -49,25 +49,25 @@ class WorkExperienceViewModel(
         }
     }
 
-    fun save() {
-        viewModelScope.launch {
-            _dataLoading.postValue(true)
-            deleteAllWorkingExperienceUseCase.invoke()
-
-            val list = DataCenter.getDemoWorkingExperienceList().map { it.toEntity() }
-
-            when (val result = saveWorkingExperienceUseCase.invoke(list)) {
-                is Result.Success -> {
-                    _dataLoading.postValue(false)
-                    _finishActivity.trigger()
-                }
-                is Result.Error -> {
-                    _dataLoading.postValue(false)
-                    _error.postValue(result.exception.message.orEmpty())
-                }
-            }
-        }
-    }
+//    fun save() {
+//        viewModelScope.launch {
+//            _dataLoading.postValue(true)
+//            deleteAllWorkingExperienceUseCase.invoke()
+//
+//            val list = DataCenter.getDemoWorkingExperienceList().map { it.toEntity() }
+//
+//            when (val result = saveWorkingExperienceUseCase.invoke(list)) {
+//                is Result.Success -> {
+//                    _dataLoading.postValue(false)
+//                    _finishActivity.trigger()
+//                }
+//                is Result.Error -> {
+//                    _dataLoading.postValue(false)
+//                    _error.postValue(result.exception.message.orEmpty())
+//                }
+//            }
+//        }
+//    }
 
     fun showConfirmationDiscard() {
         val isDataChanged = true

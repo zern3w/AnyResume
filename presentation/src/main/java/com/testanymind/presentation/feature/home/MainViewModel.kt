@@ -19,7 +19,7 @@ class MainViewModel(
     private val getPersonalInfoUseCase: GetPersonalInfoUseCase,
     private val getAllEducationUseCase: GetAllEducationUseCase,
     private val getSkillsUseCase: GetSkillsUseCase,
-    private val getWorkingExperienceUseCase: GetWorkingExperienceUseCase,
+    private val getAllWorkingExperienceUseCase: GetAllWorkingExperienceUseCase,
     private val getProjectUseCase: GetProjectUseCase
 ) : BaseViewModel() {
 
@@ -124,7 +124,7 @@ class MainViewModel(
     private fun getWorkingExpList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            when (val result = getWorkingExperienceUseCase.invoke()) {
+            when (val result = getAllWorkingExperienceUseCase.invoke()) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->

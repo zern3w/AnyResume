@@ -5,6 +5,6 @@ import com.testanymind.domain.repository.WorkingExperienceRepository
 
 class GetWorkingExperienceUseCase(private val workingExperienceRepository: WorkingExperienceRepository) {
 
-    suspend operator fun invoke() =
-        workingExperienceRepository.getWorkingExperience()
+    suspend operator fun invoke(id: Int) =
+        workingExperienceRepository.getWorkingExperience(id)
 }

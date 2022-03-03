@@ -83,7 +83,6 @@
                     app:errorEnabled="true"
                     app:errorIconDrawable="@drawable/ic_error"
                     app:errorIconTint="@color/red_500"
-
                     app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText

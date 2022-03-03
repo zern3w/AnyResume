@@ -11,7 +11,15 @@ class WorkingExperienceRepositoryImpl(
     private val db: AnyResumeDatabase
 ) : WorkingExperienceRepository {
 
-    override suspend fun getWorkingExperience() = withContext(Dispatchers.IO) {
+    override suspend fun getWorkingExperience(id: Int) = withContext(Dispatchers.IO) {
+        try {
+            return@withContext Result.Success(db.workingExperienceDao().getById(id))
+        } catch (e: Exception) {
+            return@withContext Result.Error(e)
+        }
+    }
+
+    override suspend fun getAllWorkingExperience() = withContext(Dispatchers.IO) {
         try {
             return@withContext Result.Success(db.workingExperienceDao().getAll())
         } catch (e: Exception) {
@@ -19,20 +27,44 @@ class WorkingExperienceRepositoryImpl(
         }
     }
 
-    override suspend fun saveWorkingExperience(list: List<WorkingExperienceEntity>) =
+    override suspend fun saveWorkingExperience(data: WorkingExperienceEntity) =
         withContext(Dispatchers.IO) {
             try {
-                db.workingExperienceDao().insertAll(list)
-                return@withContext Result.Success(Unit)
+                return@withContext Result.Success(db.workingExperienceDao().insert(data))
             } catch (e: Exception) {
                 return@withContext Result.Error(e)
             }
         }
 
+    override suspend fun saveAllWorkingExperience(list: List<WorkingExperienceEntity>) =
+        withContext(Dispatchers.IO) {
+            try {
+                return@withContext Result.Success(db.workingExperienceDao().insertAll(list))
+            } catch (e: Exception) {
+                return@withContext Result.Error(e)
+            }
+        }
+
+    override suspend fun updateWorkingExperience(data: WorkingExperienceEntity) =
+        withContext(Dispatchers.IO) {
+            try {
+                return@withContext Result.Success(db.workingExperienceDao().update(data))
+            } catch (e: Exception) {
+                return@withContext Result.Error(e)
+            }
+        }
+
+    override suspend fun delete(id: Int) = withContext(Dispatchers.IO) {
+        try {
+            return@withContext Result.Success(db.workingExperienceDao().deleteById(id))
+        } catch (e: Exception) {
+            return@withContext Result.Error(e)
+        }
+    }
+
     override suspend fun deleteAll() = withContext(Dispatchers.IO) {
         try {
-            db.workingExperienceDao().deleteAll()
-            return@withContext Result.Success(Unit)
+            return@withContext Result.Success(db.workingExperienceDao().deleteAll())
         } catch (e: Exception) {
             return@withContext Result.Error(e)
         }

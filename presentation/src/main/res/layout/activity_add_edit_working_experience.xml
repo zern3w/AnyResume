@@ -47,6 +47,7 @@
                 android:paddingVertical="30dp">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_company_name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,7 +55,11 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_business_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_company_name"
@@ -66,6 +71,32 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_role"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_smlarge"
+                    android:hint="@string/hint_role"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:endIconDrawable="@drawable/ic_outline_work_outline_24"
+                    app:endIconMode="custom"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require"
+                    app:endIconTint="@color/colorPrimaryLight">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_role"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:text="@={viewModel.role}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_start_date"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,18 +105,23 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_calendar_month_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_start_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
+                        android:inputType="date"
                         android:text="@={viewModel.role}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_end_date"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,13 +130,17 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_calendar_month_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_end_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
+                        android:inputType="date"
                         android:text="@={viewModel.role}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
