@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.testanymind.presentation.feature.personal.PersonalInfoViewModel" />
+            type="com.testanymind.presentation.feature.education.AddEditEducationViewModel" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -47,6 +47,7 @@
                 android:paddingVertical="30dp">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_school_name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,18 +55,22 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_school_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_school_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textCapWords"
-                        android:text="@={viewModel.name}" />
+                        android:inputType="textCapWords" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_class"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,18 +79,23 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_baseline_class_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_class_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textCapWords"
-                        android:text="@={viewModel.name}" />
+                        android:inputType="textCapWords" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_passing_year"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,14 +104,18 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_calendar_month_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_passing_year"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:text="@={viewModel.role}" />
+                        android:maxLength="4" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +135,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:text="@={viewModel.careerObjective}" />
+                        android:maxLength="4" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

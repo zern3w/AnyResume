@@ -8,18 +8,16 @@ import com.testanymind.domain.common.Result
 import com.testanymind.domain.model.*
 import com.testanymind.domain.usecase.*
 import com.testanymind.presentation.base.BaseViewModel
-import com.testanymind.presentation.extension.addChips
 import com.testanymind.presentation.lifecycle.LiveEvent
 import com.testanymind.presentation.lifecycle.LiveTrigger
 import com.testanymind.presentation.lifecycle.MutableLiveEvent
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val getPersonalInfoUseCase: GetPersonalInfoUseCase,
-    private val getEducationUseCase: GetEducationUseCase,
+    private val getAllEducationUseCase: GetAllEducationUseCase,
     private val getSkillsUseCase: GetSkillsUseCase,
     private val getWorkingExperienceUseCase: GetWorkingExperienceUseCase,
     private val getProjectUseCase: GetProjectUseCase
@@ -90,7 +88,7 @@ class MainViewModel(
     private fun getEducationList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            when (val result = getEducationUseCase.invoke()) {
+            when (val result = getAllEducationUseCase.invoke()) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->

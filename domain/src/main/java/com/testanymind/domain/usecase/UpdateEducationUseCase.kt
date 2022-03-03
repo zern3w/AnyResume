@@ -4,8 +4,8 @@ import com.testanymind.domain.entity.EducationEntity
 import com.testanymind.domain.repository.EducationRepository
 
 
-class SaveEducationUseCase(private val educationRepository: EducationRepository) {
+class UpdateEducationUseCase(private val educationRepository: EducationRepository) {
 
     suspend operator fun invoke(data: EducationEntity) =
-        educationRepository.saveEducation(data)
+        educationRepository.updateEducation(data)
 }

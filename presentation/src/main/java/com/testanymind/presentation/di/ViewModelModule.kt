@@ -1,5 +1,6 @@
 package com.testanymind.presentation.di
 
+import com.testanymind.presentation.feature.education.AddEditEducationViewModel
 import com.testanymind.presentation.feature.education.EducationViewModel
 import com.testanymind.presentation.feature.home.MainViewModel
 import com.testanymind.presentation.feature.personal.PersonalInfoViewModel
@@ -14,6 +15,7 @@ val viewModelModules = module {
     viewModel { MainViewModel(get(), get(), get(), get(), get()) }
     viewModel { SkillViewModel(get(), get(), get()) }
     viewModel { EducationViewModel(get(), get(), get()) }
+    viewModel { AddEditEducationViewModel(get(), get(), get(), get()) }
     viewModel { PersonalInfoViewModel(get(), get(), get()) }
     viewModel { WorkExperienceViewModel(get(), get(), get()) }
     viewModel { ProjectViewModel(get(), get(), get()) }

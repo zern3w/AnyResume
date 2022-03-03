@@ -7,17 +7,20 @@ import com.testanymind.domain.common.DataCenter
 import com.testanymind.domain.common.Result
 import com.testanymind.domain.model.Education
 import com.testanymind.domain.usecase.DeleteAllEducationUseCase
-import com.testanymind.domain.usecase.GetEducationUseCase
-import com.testanymind.domain.usecase.SaveEducationUseCase
+import com.testanymind.domain.usecase.GetAllEducationUseCase
+import com.testanymind.domain.usecase.SaveAllEducationUseCase
 import com.testanymind.presentation.base.BaseViewModel
+import com.testanymind.presentation.lifecycle.LiveEvent
 import com.testanymind.presentation.lifecycle.LiveTrigger
+import com.testanymind.presentation.lifecycle.MutableLiveEvent
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 class EducationViewModel(
-    private val getEducationUseCase: GetEducationUseCase,
-    private val saveEducationUseCase: SaveEducationUseCase,
+    private val getAllEducationUseCase: GetAllEducationUseCase,
+    private val saveAllEducationUseCase: SaveAllEducationUseCase,
     private val deleteAllEducationUseCase: DeleteAllEducationUseCase
 ) : BaseViewModel() {
 
@@ -33,35 +36,20 @@ class EducationViewModel(
     private val _showAddEditUi = MutableLiveTrigger()
     val showAddEditUi: LiveTrigger = _showAddEditUi
 
+    private val _showOrHideEmptyState = MutableLiveEvent<Boolean>()
+    val showOrHideEmptyState: LiveEvent<Boolean> = _showOrHideEmptyState
+
     fun getEducationList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            when (val result = getEducationUseCase.invoke()) {
+            when (val result = getAllEducationUseCase.invoke()) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->
-                        _educationList.value = list.map { it.toEducation() }
+                        val educationList = list.map { it.toEducation() }
+                        _educationList.value = educationList
+                        _showOrHideEmptyState.setEventValue(educationList.isEmpty())
                     }
-                }
-                is Result.Error -> {
-                    _dataLoading.postValue(false)
-                    _error.postValue(result.exception.message.orEmpty())
-                }
-            }
-        }
-    }
-
-    fun save() {
-        viewModelScope.launch {
-            _dataLoading.postValue(true)
-            deleteAllEducationUseCase.invoke()
-
-            val list = DataCenter.getDemoEducationList().map { it.toEntity() }
-
-            when (val result = saveEducationUseCase.invoke(list)) {
-                is Result.Success -> {
-                    _dataLoading.postValue(false)
-                    _finishActivity.trigger()
                 }
                 is Result.Error -> {
                     _dataLoading.postValue(false)

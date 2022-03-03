@@ -11,7 +11,15 @@ class EducationRepositoryImpl(
     private val db: AnyResumeDatabase
 ) : EducationRepository {
 
-    override suspend fun getEducation() = withContext(Dispatchers.IO) {
+    override suspend fun getEducation(id: Int) = withContext(Dispatchers.IO) {
+        try {
+            return@withContext Result.Success(db.educationDao().getById(id))
+        } catch (e: Exception) {
+            return@withContext Result.Error(e)
+        }
+    }
+
+    override suspend fun getAllEducation() = withContext(Dispatchers.IO) {
         try {
             return@withContext Result.Success(db.educationDao().getAll())
         } catch (e: Exception) {
@@ -19,10 +27,34 @@ class EducationRepositoryImpl(
         }
     }
 
-    override suspend fun saveEducation(list: List<EducationEntity>) = withContext(Dispatchers.IO) {
+    override suspend fun saveEducation(data: EducationEntity) = withContext(Dispatchers.IO) {
         try {
-            db.educationDao().insertAll(list)
-            return@withContext Result.Success(Unit)
+            return@withContext Result.Success(db.educationDao().insert(data))
+        } catch (e: Exception) {
+            return@withContext Result.Error(e)
+        }
+    }
+
+    override suspend fun saveAllEducation(list: List<EducationEntity>) =
+        withContext(Dispatchers.IO) {
+            try {
+                return@withContext Result.Success(db.educationDao().insertAll(list))
+            } catch (e: Exception) {
+                return@withContext Result.Error(e)
+            }
+        }
+
+    override suspend fun updateEducation(data: EducationEntity)= withContext(Dispatchers.IO) {
+        try {
+            return@withContext Result.Success(db.educationDao().update(data))
+        } catch (e: Exception) {
+            return@withContext Result.Error(e)
+        }
+    }
+
+    override suspend fun delete(id: Int) = withContext(Dispatchers.IO) {
+        try {
+            return@withContext Result.Success(db.educationDao().deleteById(id))
         } catch (e: Exception) {
             return@withContext Result.Error(e)
         }
@@ -30,8 +62,7 @@ class EducationRepositoryImpl(
 
     override suspend fun deleteAll() = withContext(Dispatchers.IO) {
         try {
-            db.educationDao().deleteAll()
-            return@withContext Result.Success(Unit)
+            return@withContext Result.Success(db.educationDao().deleteAll())
         } catch (e: Exception) {
             return@withContext Result.Error(e)
         }

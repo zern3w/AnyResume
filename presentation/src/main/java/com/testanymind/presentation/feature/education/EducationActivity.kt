@@ -4,13 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.testanymind.domain.model.Education
 import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityEducationBinding
 import com.testanymind.presentation.extension.observe
+import com.testanymind.presentation.extension.observeEvent
 import com.testanymind.presentation.extension.observeTrigger
 import com.testanymind.presentation.view.adapter.EducationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,7 +26,7 @@ class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
     private val viewModel: EducationViewModel by viewModel()
 
     private val educationAdapter by lazy {
-        EducationAdapter(listOf())
+        EducationAdapter(listOf(), ::onItemClick)
     }
 
     private val recyclerViewDivider by lazy {
@@ -44,13 +47,12 @@ class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_add_edit, menu)
+        menuInflater.inflate(R.menu.menu_add, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_save -> viewModel.save()
             R.id.menu_add -> viewModel.showAddEditUi()
         }
         return super.onOptionsItemSelected(item)
@@ -79,6 +81,10 @@ class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
                 educationAdapter.submitData(it)
             }
 
+            observeEvent(showOrHideEmptyState) {
+                viewBinding.viewEmptyState.root.isVisible = it
+            }
+
             observeTrigger(finishActivity) {
                 finish()
             }
@@ -96,6 +102,10 @@ class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
     private fun initListener() {
         viewBinding.apply {
         }
+    }
+
+    private fun onItemClick(data: Education) {
+        startActivity(AddEditEducationActivity.newIntent(this@EducationActivity, data._id))
     }
 
     private fun showConfirmationDiscardDialog() {

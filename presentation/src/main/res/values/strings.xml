@@ -54,17 +54,20 @@
     <string name="hint_gpa">GPA</string>
 
     <string name="error_invalid_email_format">Invalid email format</string>
+    <string name="error_required">Required</string>
+    <string name="error_no_item">No Item</string>
 
     <string name="dialog_discard_message">Discard draft?</string>
 
     <string name="confirmation">Confirmation</string>
     <string name="save">Save</string>
+    <string name="delete">Delete</string>
     <string name="discard">Discard</string>
     <string name="cancel">Cancel</string>
 
     <string name="add">Add</string>
     <string name="edit">Edit</string>
 
-    <string name="error_no_item">No Item</string>
+    <string name="helper_require">*required</string>
 
 </resources>

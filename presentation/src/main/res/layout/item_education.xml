@@ -66,6 +66,7 @@
                     tools:text="2012-2017" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_separator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -77,6 +78,7 @@
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_gpa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

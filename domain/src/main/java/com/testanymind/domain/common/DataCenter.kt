@@ -22,14 +22,14 @@ class DataCenter {
                     schoolName = "Chiang Mai University",
                     logo = "https://bit.ly/3vJryQX",
                     _class = "Bachelor in Software Engineering",
-                    passingYear = "2012-2017",
+                    passingYear = "2017",
                     gpa = 2.76
                 ),
                 Education(
                     schoolName = "Yupparaj Wittayarai School",
                     logo = "https://scontent.fcnx1-1.fna.fbcdn.net/v/t39.30808-6/273322075_4957866777628246_3901931508692881460_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeF1n571rKLC9lUs2p6bxLJvywTWq5YuFILLBNarli4UgoKxki1c8MyeNUMVsVz_i7Y&_nc_ohc=0EdKOHkRztgAX-_BOX-&_nc_ht=scontent.fcnx1-1.fna&oh=00_AT9_IvRSfjKcmv0LpStZmXgxHMTlJ9fggHjZOf1X6uSOKQ&oe=62234409",
                     _class = "High School",
-                    passingYear = "2006-2012",
+                    passingYear = "2012",
                     gpa = 3.45
                 )
             )

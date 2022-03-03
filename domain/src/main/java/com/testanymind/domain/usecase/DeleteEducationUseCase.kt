@@ -3,8 +3,8 @@ package com.testanymind.domain.usecase
 import com.testanymind.domain.repository.EducationRepository
 
 
-class GetEducationUseCase(private val educationRepository: EducationRepository) {
+class DeleteEducationUseCase(private val educationRepository: EducationRepository) {
 
     suspend operator fun invoke(id: Int) =
-        educationRepository.getEducation(id)
+        educationRepository.delete(id)
 }

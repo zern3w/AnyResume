@@ -25,7 +25,7 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_save, menu)
+        menuInflater.inflate(R.menu.menu_save_delete, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

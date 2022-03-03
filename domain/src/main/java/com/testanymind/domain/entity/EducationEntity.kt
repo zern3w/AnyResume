@@ -16,6 +16,7 @@ data class EducationEntity(
     var id: Int = 0
 
     fun toEducation() = Education(
+        _id = id,
         schoolName = schoolName,
         logo = logo,
         _class = _class,
