@@ -60,7 +60,6 @@ class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
 
     override fun start() {
         initView()
-        initListener()
         initObserver()
         viewModel.getEducationList()
     }
@@ -96,11 +95,6 @@ class EducationActivity : DataBindingActivity<ActivityEducationBinding>() {
             observeTrigger(showAddEditUi) {
                 startActivity(AddEditEducationActivity.newIntent(this@EducationActivity))
             }
-        }
-    }
-
-    private fun initListener() {
-        viewBinding.apply {
         }
     }
 

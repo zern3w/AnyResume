@@ -5,22 +5,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.testanymind.domain.common.DataCenter
 import com.testanymind.domain.common.Result
+import com.testanymind.domain.model.Education
 import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.domain.usecase.*
 import com.testanymind.presentation.base.BaseViewModel
+import com.testanymind.presentation.lifecycle.LiveEvent
 import com.testanymind.presentation.lifecycle.LiveTrigger
+import com.testanymind.presentation.lifecycle.MutableLiveEvent
 import com.testanymind.presentation.lifecycle.MutableLiveTrigger
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
-class ProjectViewModel(
-    private val getAllProjectUseCase: GetAllProjectUseCase,
-    private val saveAllProjectUseCase: SaveAllProjectUseCase,
-    private val deleteAllProjectUseCase: DeleteAllProjectUseCase,
+class AddEditProjectViewModel(
+    private val getProjectUseCase: GetProjectUseCase,
+    private val saveProjectUseCase: SaveProjectUseCase,
+    private val updateProjectUseCase: UpdateProjectUseCase,
+    private val deleteProjectUseCase: DeleteProjectUseCase
 ) : BaseViewModel() {
 
-    private val _projectList = MutableLiveData<List<ProjectDetail>>(arrayListOf())
-    val projectList: LiveData<List<ProjectDetail>> = _projectList
+    private val _project = MutableLiveData<ProjectDetail>()
+    val project: LiveData<ProjectDetail> = _project
 
     private val _finishActivity = MutableLiveTrigger()
     val finishActivity: LiveTrigger = _finishActivity
@@ -28,17 +33,14 @@ class ProjectViewModel(
     private val _showConfirmationDiscard = MutableLiveTrigger()
     val showConfirmationDiscard: LiveTrigger = _showConfirmationDiscard
 
-    private val _showAddEditUi = MutableLiveTrigger()
-    val showAddEditUi: LiveTrigger = _showAddEditUi
-
-    fun getProjectList() {
+    fun getProject(id: Int) {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            when (val result = getAllProjectUseCase.invoke()) {
+            when (val result = getProjectUseCase.invoke(id)) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
-                    result.data.collect { list ->
-                        _projectList.value = list.map { it.toProject() }
+                    result.data.filterNotNull().collect { data ->
+                        _project.value = data.toProject()
                     }
                 }
                 is Result.Error -> {
@@ -49,14 +51,42 @@ class ProjectViewModel(
         }
     }
 
-    fun save() {
+    fun save(data: ProjectDetail) {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            deleteAllProjectUseCase.invoke()
+            when (val result = saveProjectUseCase.invoke(data.toEntity())) {
+                is Result.Success -> {
+                    _dataLoading.postValue(false)
+                    _finishActivity.trigger()
+                }
+                is Result.Error -> {
+                    _dataLoading.postValue(false)
+                    _error.postValue(result.exception.message.orEmpty())
+                }
+            }
+        }
+    }
 
-            val list = DataCenter.getDemoProjectList().map { it.toEntity() }
+    fun update(data: ProjectDetail) {
+        viewModelScope.launch {
+            _dataLoading.postValue(true)
+            when (val result = updateProjectUseCase.invoke(data.toEntity().apply { id = data._id })) {
+                is Result.Success -> {
+                    _dataLoading.postValue(false)
+                    _finishActivity.trigger()
+                }
+                is Result.Error -> {
+                    _dataLoading.postValue(false)
+                    _error.postValue(result.exception.message.orEmpty())
+                }
+            }
+        }
+    }
 
-            when (val result = saveAllProjectUseCase.invoke(list)) {
+    fun delete(id: Int) {
+        viewModelScope.launch {
+            _dataLoading.postValue(true)
+            when (val result = deleteProjectUseCase.invoke(id)) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     _finishActivity.trigger()
@@ -81,9 +111,5 @@ class ProjectViewModel(
 
     fun finishActivity() {
         _finishActivity.trigger()
-    }
-
-    fun showAddEditUi() {
-        _showAddEditUi.trigger()
     }
 }

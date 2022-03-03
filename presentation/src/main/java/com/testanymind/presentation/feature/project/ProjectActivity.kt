@@ -7,11 +7,14 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.testanymind.domain.model.Education
+import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.presentation.*
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityProjectBinding
 import com.testanymind.presentation.extension.observe
 import com.testanymind.presentation.extension.observeTrigger
+import com.testanymind.presentation.feature.education.AddEditEducationActivity
 import com.testanymind.presentation.view.adapter.ProjectAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,7 +26,7 @@ class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
     private val viewModel: ProjectViewModel by viewModel()
 
     private val projectAdapter by lazy {
-        ProjectAdapter(listOf())
+        ProjectAdapter(listOf(), true, ::onItemClick)
     }
 
     private val recyclerViewDivider by lazy {
@@ -58,7 +61,6 @@ class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
 
     override fun start() {
         initView()
-        initListener()
         initObserver()
         viewModel.getProjectList()
     }
@@ -93,9 +95,8 @@ class ProjectActivity : DataBindingActivity<ActivityProjectBinding>() {
         }
     }
 
-    private fun initListener() {
-        viewBinding.apply {
-        }
+    private fun onItemClick(data: ProjectDetail) {
+        startActivity(AddEditProjectActivity.newIntent(this@ProjectActivity, data._id))
     }
 
     private fun showConfirmationDiscardDialog() {

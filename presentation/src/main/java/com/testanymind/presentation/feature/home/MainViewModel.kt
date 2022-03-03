@@ -20,7 +20,7 @@ class MainViewModel(
     private val getAllEducationUseCase: GetAllEducationUseCase,
     private val getSkillsUseCase: GetSkillsUseCase,
     private val getAllWorkingExperienceUseCase: GetAllWorkingExperienceUseCase,
-    private val getProjectUseCase: GetProjectUseCase
+    private val getAllProjectUseCase: GetAllProjectUseCase
 ) : BaseViewModel() {
 
     private val _personalInfo = MutableLiveData<PersonalInfo>()
@@ -142,7 +142,7 @@ class MainViewModel(
     private fun getProjectList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            when (val result = getProjectUseCase.invoke()) {
+            when (val result = getAllProjectUseCase.invoke()) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
                     result.data.collect { list ->

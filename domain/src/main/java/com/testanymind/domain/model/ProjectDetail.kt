@@ -3,6 +3,7 @@ package com.testanymind.domain.model
 import com.testanymind.domain.entity.ProjectEntity
 
 data class ProjectDetail(
+    val _id: Int = -1,
     val projectName: String,
     val logo: String,
     val teamSize: Int,

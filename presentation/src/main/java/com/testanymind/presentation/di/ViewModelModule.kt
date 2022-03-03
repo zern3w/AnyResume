@@ -4,6 +4,7 @@ import com.testanymind.presentation.feature.education.AddEditEducationViewModel
 import com.testanymind.presentation.feature.education.EducationViewModel
 import com.testanymind.presentation.feature.home.MainViewModel
 import com.testanymind.presentation.feature.personal.PersonalInfoViewModel
+import com.testanymind.presentation.feature.project.AddEditProjectViewModel
 import com.testanymind.presentation.feature.project.ProjectViewModel
 import com.testanymind.presentation.feature.skill.SkillViewModel
 import com.testanymind.presentation.feature.workexperience.AddEditWorkExperienceViewModel
@@ -21,5 +22,6 @@ val viewModelModules = module {
     viewModel { WorkExperienceViewModel(get(), get(), get()) }
     viewModel { ProjectViewModel(get(), get(), get()) }
     viewModel { AddEditWorkExperienceViewModel(get(), get(), get(), get()) }
+    viewModel { AddEditProjectViewModel(get(), get(), get(), get()) }
 
 }

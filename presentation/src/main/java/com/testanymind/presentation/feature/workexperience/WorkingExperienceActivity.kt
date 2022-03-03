@@ -59,7 +59,6 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
 
     override fun start() {
         initView()
-        initListener()
         initObserver()
         viewModel.getWorkingExpList()
     }
@@ -91,11 +90,6 @@ class WorkingExperienceActivity : DataBindingActivity<ActivityWorkExperienceBind
             observeTrigger(showAddEditUi) {
                 startActivity(AddEditWorkingExperienceActivity.newIntent(this@WorkingExperienceActivity))
             }
-        }
-    }
-
-    private fun initListener() {
-        viewBinding.apply {
         }
     }
 

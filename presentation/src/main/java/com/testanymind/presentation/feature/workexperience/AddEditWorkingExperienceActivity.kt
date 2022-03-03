@@ -86,7 +86,6 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
 
     override fun start() {
         initView()
-        initListener()
         initObserver()
 
         if (workingExpId != CREATE_MODE) viewModel.getWorkExp(workingExpId)
@@ -117,11 +116,6 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
             observeTrigger(showConfirmationDiscard) {
                 showConfirmationDiscardDialog()
             }
-        }
-    }
-
-    private fun initListener() {
-        viewBinding.apply {
         }
     }
 

@@ -29,6 +29,10 @@ val useCaseModule = module {
     single { DeleteAllWorkingExperienceUseCase(get()) }
 
     single { GetProjectUseCase(get()) }
+    single { GetAllProjectUseCase(get()) }
     single { SaveProjectUseCase(get()) }
+    single { SaveAllProjectUseCase(get()) }
+    single { UpdateProjectUseCase(get()) }
+    single { DeleteProjectUseCase(get()) }
     single { DeleteAllProjectUseCase(get()) }
 }

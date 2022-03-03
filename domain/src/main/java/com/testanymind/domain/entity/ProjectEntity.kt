@@ -17,6 +17,7 @@ data class ProjectEntity(
     var id: Int = 0
 
     fun toProject() = ProjectDetail(
+        _id = id,
         projectName = projectName,
         logo = logo,
         teamSize = teamSize,

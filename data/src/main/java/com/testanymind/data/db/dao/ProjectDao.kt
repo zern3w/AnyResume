@@ -1,9 +1,6 @@
 package com.testanymind.data.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.testanymind.domain.entity.EducationEntity
 import com.testanymind.domain.entity.ProjectEntity
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +19,9 @@ interface ProjectDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(projects: List<ProjectEntity>)
+
+    @Update
+    fun update(project: ProjectEntity)
 
     @Query("DELETE FROM project WHERE id=:id")
     fun deleteById(id: Int)
