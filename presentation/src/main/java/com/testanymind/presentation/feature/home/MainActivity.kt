@@ -2,6 +2,7 @@ package com.testanymind.presentation.feature.home
 
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -51,6 +52,7 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_toggle_edit_mode -> viewModel.toggleEditModeSwitch()
+            R.id.menu_toggle_demo_mode -> viewModel.toggleDemoModeSwitch()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -61,14 +63,10 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
         initObserver()
 
         viewModel.apply {
-            getPersonalInfo()
-            getEducationList()
-            getSkillList()
-            getWorkingExpList()
-            getProjectList()
+            getAllData()
 
             // for testing
-//            getDemoData()
+//            toggleDemoModeSwitch()
             toggleEditModeSwitch()
         }
     }
@@ -101,7 +99,10 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
             observe(workingExpList, workingExperienceAdapter::submitData)
             observe(projectList, projectAdapter::submitData)
             observe(skillList) { list ->
-                viewBinding.viewSkill.chipGroupSkill.addChips(list.map { it.skill })
+                viewBinding.viewSkill.chipGroupSkill.apply {
+                    removeAllViews()
+                    addChips(list.map { it.skill })
+                }
             }
 
             observeEvent(toggleEditModeSwitch, ::isEditModeSwitch)
@@ -147,10 +148,15 @@ class MainActivity : DataBindingActivity<ActivityMainBinding>() {
 
     private fun setupPersonalInfoView(info: PersonalInfo) {
         viewBinding.apply {
-            ivAvatar.load(info.avatar)
-            tvName.text = info.name
-            tvRole.text = info.role
-            tvCareerObjective.text = info.careerObjective
+            if (info.avatar.isEmpty()) {
+                ContextCompat.getDrawable(this@MainActivity, R.drawable.placeholder_avatar)
+                    ?.let { ivAvatar.load(it) }
+            } else {
+                ivAvatar.load(info.avatar)
+            }
+            tvName.text = info.name.ifEmpty { getString(R.string.hint_name) }
+            tvRole.text = info.role.ifEmpty { getString(R.string.hint_role) }
+            tvCareerObjective.text = info.careerObjective.ifEmpty { getString(R.string.hint_career_objective) }
 
             viewPersonal.apply {
                 etMobile.setText(info.mobile)

@@ -135,3 +135,9 @@ fun ShapeableImageView.load(url: String) {
         .load(url)
         .into(this)
 }
+
+fun ShapeableImageView.load(drawable: Drawable) {
+    Glide.with(this)
+        .load(drawable)
+        .into(this)
+}

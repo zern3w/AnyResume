@@ -59,15 +59,24 @@ class MainViewModel(
     val toggleEditModeSwitch: LiveEvent<Boolean> = _toggleEditModeSwitch
 
     private var isEditModeSwitch = false
+    private var isDemoModeSwitch = false
 
-    fun getPersonalInfo() {
+    fun getAllData() {
+        getPersonalInfo()
+        getEducationList()
+        getSkillList()
+        getWorkingExpList()
+        getProjectList()
+    }
+
+    private fun getPersonalInfo() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             when (val result = getPersonalInfoUseCase.invoke()) {
                 is Result.Success -> {
                     _dataLoading.postValue(false)
-                    result.data.filterNotNull().collect {
-                        _personalInfo.value = it.toPersonalInfo()
+                    result.data.collect {
+                        _personalInfo.value = if (it == null) PersonalInfo.empty() else it.toPersonalInfo()
                     }
                 }
                 is Result.Error -> {
@@ -78,7 +87,7 @@ class MainViewModel(
         }
     }
 
-    fun getEducationList() {
+    private fun getEducationList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             when (val result = getEducationUseCase.invoke()) {
@@ -96,7 +105,7 @@ class MainViewModel(
         }
     }
 
-    fun getSkillList() {
+    private fun getSkillList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             when (val result = getSkillsUseCase.invoke()) {
@@ -114,7 +123,7 @@ class MainViewModel(
         }
     }
 
-    fun getWorkingExpList() {
+    private fun getWorkingExpList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             when (val result = getWorkingExperienceUseCase.invoke()) {
@@ -132,7 +141,7 @@ class MainViewModel(
         }
     }
 
-    fun getProjectList() {
+    private fun getProjectList() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             when (val result = getProjectUseCase.invoke()) {
@@ -147,16 +156,6 @@ class MainViewModel(
                     _error.postValue(result.exception.message.orEmpty())
                 }
             }
-        }
-    }
-
-    fun getDemoData() {
-        viewModelScope.launch {
-            _personalInfo.value = DataCenter.getPersonalInfo()
-            _educationList.value = DataCenter.getDemoEducationList()
-            _skillList.value = DataCenter.getDemoSkillList()
-            _workingExpList.value = DataCenter.getDemoWorkingExperienceList()
-            _projectList.value = DataCenter.getDemoProjectList()
         }
     }
 
@@ -180,8 +179,27 @@ class MainViewModel(
         _showEditProjectUiEvent.trigger()
     }
 
+    fun toggleDemoModeSwitch() {
+        isDemoModeSwitch = !isDemoModeSwitch
+        if (isDemoModeSwitch) {
+            getDemoData()
+        } else {
+            getAllData()
+        }
+    }
+
     fun toggleEditModeSwitch() {
         isEditModeSwitch = !isEditModeSwitch
         _toggleEditModeSwitch.setEventValue(isEditModeSwitch)
+    }
+
+    private fun getDemoData() {
+        viewModelScope.launch {
+            _personalInfo.value = DataCenter.getPersonalInfo()
+            _educationList.value = DataCenter.getDemoEducationList()
+            _skillList.value = DataCenter.getDemoSkillList()
+            _workingExpList.value = DataCenter.getDemoWorkingExperienceList()
+            _projectList.value = DataCenter.getDemoProjectList()
+        }
     }
 }

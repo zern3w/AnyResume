@@ -12,6 +12,18 @@ data class PersonalInfo(
     val address: String
 ) {
 
+    companion object {
+        fun empty() = PersonalInfo(
+            name = "",
+            role = "",
+            careerObjective = "",
+            avatar = "",
+            mobile = "",
+            email = "",
+            address = ""
+        )
+    }
+
     fun toEntity() = PersonalInfoEntity(
         name = name,
         role = role,

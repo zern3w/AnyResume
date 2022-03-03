@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_document_edit"
         android:title="@string/toggle_edit_mode" />
 
+    <item
+        android:id="@+id/menu_toggle_demo_mode"
+        android:icon="@drawable/ic_document_edit"
+        android:title="@string/toggle_demo_mode" />
+
 </menu>
