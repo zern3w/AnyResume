@@ -12,12 +12,14 @@ import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityAddEditWorkingExperienceBinding
 import com.testanymind.presentation.extension.observe
 import com.testanymind.presentation.extension.observeTrigger
+import com.testanymind.presentation.extension.toDate
 import com.testanymind.presentation.extension.toReadableMonthYear
 import com.whiteelephant.monthpicker.MonthPickerDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWorkingExperienceBinding>() {
+class AddEditWorkingExperienceActivity :
+    DataBindingActivity<ActivityAddEditWorkingExperienceBinding>() {
 
     override fun layoutId() = R.layout.activity_add_edit_working_experience
     override fun getToolBar() = viewBinding.toolbar
@@ -38,9 +40,6 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
             time = today
         }
     }
-
-    private var startDate = Date()
-    private var endDate = Date()
 
     companion object {
         private const val CREATE_MODE = -1
@@ -158,14 +157,17 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
 
     private fun areRequireWasFilled(): Boolean {
         viewBinding.apply {
-            val result = !etCompanyName.text.isNullOrEmpty() && !etRole.text.isNullOrEmpty() && !etStartDate.text.isNullOrEmpty() && !etEndDate.text.isNullOrEmpty()
+            val result =
+                !etCompanyName.text.isNullOrEmpty() && !etRole.text.isNullOrEmpty() && !etStartDate.text.isNullOrEmpty() && !etEndDate.text.isNullOrEmpty()
             showErrorRequired(!result)
             return result
         }
     }
 
     private fun isEndDateAfterStartDate(): Boolean {
-      val result = endDate.after(startDate)
+        val startDate = viewBinding.etStartDate.text.toString().toDate(Constants.FORMAT_MONTH_YEAR)
+        val endDate = viewBinding.etEndDate.text.toString().toDate(Constants.FORMAT_MONTH_YEAR)
+        val result = endDate.after(startDate)
         showErrorEndDateBeforeStart(!result)
         return result
     }
@@ -200,11 +202,9 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
                 set(Calendar.MONTH, selectedMonth)
             }
             if (isStartDate) {
-                startDate = cal.time
-                viewBinding.etStartDate.setText(startDate.toReadableMonthYear(Constants.FORMAT_MONTH_YEAR))
+                viewBinding.etStartDate.setText(cal.time.toReadableMonthYear(Constants.FORMAT_MONTH_YEAR))
             } else {
-                endDate = cal.time
-                viewBinding.etEndDate.setText(endDate.toReadableMonthYear(Constants.FORMAT_MONTH_YEAR))
+                viewBinding.etEndDate.setText(cal.time.toReadableMonthYear(Constants.FORMAT_MONTH_YEAR))
             }
         }, currentYear, currentMonth)
 
@@ -217,9 +217,9 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
 
     override fun onBackPressed() {
         if ((!viewBinding.etCompanyName.text.isNullOrEmpty() ||
-            !viewBinding.etRole.text.isNullOrEmpty() ||
-            !viewBinding.etStartDate.text.isNullOrEmpty() ||
-            !viewBinding.etEndDate.text.isNullOrEmpty()) &&
+                    !viewBinding.etRole.text.isNullOrEmpty() ||
+                    !viewBinding.etStartDate.text.isNullOrEmpty() ||
+                    !viewBinding.etEndDate.text.isNullOrEmpty()) &&
             workingExpId == CREATE_MODE
         ) {
             viewModel.showConfirmationDiscard()

@@ -113,6 +113,7 @@
                         android:id="@+id/et_passing_year"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
                         android:inputType="numberDecimal"
                         android:maxLength="4" />
 

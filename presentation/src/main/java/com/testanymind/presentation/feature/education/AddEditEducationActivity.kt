@@ -7,13 +7,17 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.testanymind.domain.Constants
 import com.testanymind.domain.model.Education
 import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityAddEditEducationBinding
 import com.testanymind.presentation.extension.observe
 import com.testanymind.presentation.extension.observeTrigger
+import com.testanymind.presentation.extension.toReadableMonthYear
+import com.whiteelephant.monthpicker.MonthPickerDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class AddEditEducationActivity : DataBindingActivity<ActivityAddEditEducationBinding>(),
     TextWatcher {
@@ -28,6 +32,14 @@ class AddEditEducationActivity : DataBindingActivity<ActivityAddEditEducationBin
     }
 
     private var etGpaLengthBeforeChanged = 0
+
+    private val today by lazy { Date() }
+
+    private val calendar by lazy {
+        Calendar.getInstance().apply {
+            time = today
+        }
+    }
 
     companion object {
         private const val CREATE_MODE = -1
@@ -127,6 +139,9 @@ class AddEditEducationActivity : DataBindingActivity<ActivityAddEditEducationBin
 
     private fun initListener() {
         viewBinding.apply {
+            etPassingYear.setOnClickListener {
+                showYearPickerDialog()
+            }
             etGpa.addTextChangedListener(this@AddEditEducationActivity)
         }
     }
@@ -149,6 +164,21 @@ class AddEditEducationActivity : DataBindingActivity<ActivityAddEditEducationBin
             .show()
     }
 
+    private fun showYearPickerDialog() {
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentYear = calendar.get(Calendar.YEAR)
+
+        val builder = MonthPickerDialog.Builder(this, { selectedMonth, selectedYear ->
+            viewBinding.etPassingYear.setText(selectedYear.toString())
+        }, currentYear, currentMonth)
+
+        builder.setMaxYear(currentYear)
+            .showYearOnly()
+            .setTitle(getString(R.string.passing_year))
+            .build()
+            .show()
+    }
+
     private fun showErrorRequired(isVisible: Boolean) {
         viewBinding.apply {
             textLayoutSchoolName.error =
@@ -162,10 +192,10 @@ class AddEditEducationActivity : DataBindingActivity<ActivityAddEditEducationBin
 
     override fun onBackPressed() {
         if ((!viewBinding.etSchoolName.text.isNullOrEmpty() ||
-            !viewBinding.etClassName.text.isNullOrEmpty() ||
-            !viewBinding.etPassingYear.text.isNullOrEmpty() ||
-            !viewBinding.etGpa.text.isNullOrEmpty()) &&
-                    educationId == CREATE_MODE
+                    !viewBinding.etClassName.text.isNullOrEmpty() ||
+                    !viewBinding.etPassingYear.text.isNullOrEmpty() ||
+                    !viewBinding.etGpa.text.isNullOrEmpty()) &&
+            educationId == CREATE_MODE
         ) {
             viewModel.showConfirmationDiscard()
         } else {
