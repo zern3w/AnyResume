@@ -35,7 +35,7 @@
     <string name="hint_name">Full name</string>
     <string name="hint_role">Role</string>
     <string name="hint_career_objective">Career Objective</string>
-    <string name="hint_add_skill">Add Skill</string>
+    <string name="hint_add_skill">Add Skill (Kotlin, Java)</string>
 
     <string name="hint_project_name">Project Name</string>
     <string name="hint_team_size">Team Size</string>
@@ -49,12 +49,13 @@
     <string name="hint_start_date">Start Date</string>
     <string name="hint_end_date">End Date</string>
 
-    <string name="hint_class">Class</string>
-    <string name="hint_passing_year">Passing Year</string>
-    <string name="hint_gpa">GPA</string>
+    <string name="hint_class">Class (X, XII, Graduation)</string>
+    <string name="hint_passing_year">Passing Year (2016)</string>
+    <string name="hint_gpa">GPA (4.00)</string>
 
     <string name="error_invalid_email_format">Invalid email format</string>
     <string name="error_required">Required</string>
+    <string name="error_end_date_before_start">End date is before start date</string>
     <string name="error_no_item">No Item</string>
 
     <string name="dialog_discard_message">Discard draft?</string>

@@ -55,7 +55,11 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_assignment_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_project_name"
@@ -76,7 +80,11 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_groups_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_team_size"
@@ -97,7 +105,11 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_description_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_project_summary"
@@ -118,7 +130,11 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:endIconDrawable="@drawable/ic_outline_work_outline_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorPrimaryLight">
+                    app:endIconTint="@color/colorPrimaryLight"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_error"
+                    app:errorIconTint="@color/red_500"
+                    app:helperText="@string/helper_require">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_role"

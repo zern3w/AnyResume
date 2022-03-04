@@ -11,7 +11,7 @@ data class WorkingExperience(
     val endDate: String
 ) {
     fun getDuration(): String {
-        return "Mar 2017 - Dec 2021"
+        return "$startDate - $endDate"
     }
 
     fun toEntity() = WorkingExperienceEntity(

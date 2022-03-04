@@ -5,15 +5,17 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.testanymind.domain.model.Education
+import com.testanymind.domain.Constants
 import com.testanymind.domain.model.WorkingExperience
 import com.testanymind.presentation.R
 import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityAddEditWorkingExperienceBinding
 import com.testanymind.presentation.extension.observe
 import com.testanymind.presentation.extension.observeTrigger
-import com.testanymind.presentation.feature.education.AddEditEducationActivity
+import com.testanymind.presentation.extension.toReadableMonthYear
+import com.whiteelephant.monthpicker.MonthPickerDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWorkingExperienceBinding>() {
 
@@ -28,6 +30,17 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
             CREATE_MODE
         )
     }
+
+    private val today by lazy { Date() }
+
+    private val calendar by lazy {
+        Calendar.getInstance().apply {
+            time = today
+        }
+    }
+
+    private var startDate = Date()
+    private var endDate = Date()
 
     companion object {
         private const val CREATE_MODE = -1
@@ -51,29 +64,30 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_save -> {
-                showErrorRequired(!areRequireWasFilled())
                 if (areRequireWasFilled()) {
-                    if (workingExpId == CREATE_MODE) {
-                        viewModel.save(
-                            WorkingExperience(
-                                companyName = viewBinding.etCompanyName.text.toString(),
-                                role = viewBinding.etRole.text.toString(),
-                                startDate = viewBinding.etStartDate.text.toString(),
-                                endDate = viewBinding.etEndDate.text.toString(),
-                                logo = ""
+                    if (isEndDateAfterStartDate()) {
+                        if (workingExpId == CREATE_MODE) {
+                            viewModel.save(
+                                WorkingExperience(
+                                    companyName = viewBinding.etCompanyName.text.toString(),
+                                    role = viewBinding.etRole.text.toString(),
+                                    startDate = viewBinding.etStartDate.text.toString(),
+                                    endDate = viewBinding.etEndDate.text.toString(),
+                                    logo = ""
+                                )
                             )
-                        )
-                    } else {
-                        viewModel.update(
-                            WorkingExperience(
-                                _id = workingExpId,
-                                companyName = viewBinding.etCompanyName.text.toString(),
-                                role = viewBinding.etRole.text.toString(),
-                                startDate = viewBinding.etStartDate.text.toString(),
-                                endDate = viewBinding.etEndDate.text.toString(),
-                                logo = ""
+                        } else {
+                            viewModel.update(
+                                WorkingExperience(
+                                    _id = workingExpId,
+                                    companyName = viewBinding.etCompanyName.text.toString(),
+                                    role = viewBinding.etRole.text.toString(),
+                                    startDate = viewBinding.etStartDate.text.toString(),
+                                    endDate = viewBinding.etEndDate.text.toString(),
+                                    logo = ""
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
@@ -86,9 +100,20 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
 
     override fun start() {
         initView()
+        initListener()
         initObserver()
 
         if (workingExpId != CREATE_MODE) viewModel.getWorkExp(workingExpId)
+    }
+
+    private fun initListener() {
+        viewBinding.etStartDate.setOnClickListener {
+            showMonthYearPickerDialog(true)
+        }
+
+        viewBinding.etEndDate.setOnClickListener {
+            showMonthYearPickerDialog(false)
+        }
     }
 
     private fun initView() {
@@ -133,8 +158,16 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
 
     private fun areRequireWasFilled(): Boolean {
         viewBinding.apply {
-            return !etCompanyName.text.isNullOrEmpty() && !etRole.text.isNullOrEmpty() && !etStartDate.text.isNullOrEmpty() && !etEndDate.text.isNullOrEmpty()
+            val result = !etCompanyName.text.isNullOrEmpty() && !etRole.text.isNullOrEmpty() && !etStartDate.text.isNullOrEmpty() && !etEndDate.text.isNullOrEmpty()
+            showErrorRequired(!result)
+            return result
         }
+    }
+
+    private fun isEndDateAfterStartDate(): Boolean {
+      val result = endDate.after(startDate)
+        showErrorEndDateBeforeStart(!result)
+        return result
     }
 
     private fun showErrorRequired(isVisible: Boolean) {
@@ -148,6 +181,38 @@ class AddEditWorkingExperienceActivity : DataBindingActivity<ActivityAddEditWork
             textLayoutEndDate.error =
                 if (isVisible && etEndDate.text.isNullOrEmpty()) getString(R.string.error_required) else null
         }
+    }
+
+    private fun showErrorEndDateBeforeStart(isVisible: Boolean) {
+        viewBinding.apply {
+            textLayoutEndDate.error =
+                if (isVisible) getString(R.string.error_end_date_before_start) else null
+        }
+    }
+
+    private fun showMonthYearPickerDialog(isStartDate: Boolean) {
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentYear = calendar.get(Calendar.YEAR)
+
+        val builder = MonthPickerDialog.Builder(this, { selectedMonth, selectedYear ->
+            val cal = Calendar.getInstance().apply {
+                set(Calendar.YEAR, selectedYear)
+                set(Calendar.MONTH, selectedMonth)
+            }
+            if (isStartDate) {
+                startDate = cal.time
+                viewBinding.etStartDate.setText(startDate.toReadableMonthYear(Constants.FORMAT_MONTH_YEAR))
+            } else {
+                endDate = cal.time
+                viewBinding.etEndDate.setText(endDate.toReadableMonthYear(Constants.FORMAT_MONTH_YEAR))
+            }
+        }, currentYear, currentMonth)
+
+        builder.setMaxYear(currentYear)
+            .setMaxMonth(currentMonth)
+            .setTitle(getString(if (isStartDate) R.string.hint_start_date else R.string.hint_end_date))
+            .build()
+            .show()
     }
 
     override fun onBackPressed() {
