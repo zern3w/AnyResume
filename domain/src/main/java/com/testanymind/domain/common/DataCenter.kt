@@ -54,22 +54,22 @@ class DataCenter {
                     companyName = "Ookbee U Co.,Ltd",
                     logo = "https://bit.ly/3M8fIWh",
                     role = "Android Developer",
-                    startDate = "",
-                    endDate = ""
+                    startDate = "Mar 2016",
+                    endDate = "Mar 2022"
                 ),
                 WorkingExperience(
                     companyName = "CLBS Co.,Ltd",
                     logo = "https://scontent.fcnx1-1.fna.fbcdn.net/v/t39.30808-6/250373640_10159539672512954_7098023189049123787_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeE38yROhFvh_iYq7TBmyFaI9gtGfw0t_t32C0Z_DS3-3UpAJj6-o0yumjZEpwRgEVk&_nc_ohc=OeSNUPYhJ1cAX8EqLDt&_nc_ht=scontent.fcnx1-1.fna&oh=00_AT8SoW7jMvVBOeUurTlIWgD_PdZR3WKmkizD2XbyxWQAEw&oe=62234580",
                     role = "Mobile Developer",
-                    startDate = "",
-                    endDate = ""
+                    startDate = "Dec 2014",
+                    endDate = "Feb 2016"
                 ),
                 WorkingExperience(
                     companyName = "Iglu Co.,Ltd",
                     logo = "https://media-exp1.licdn.com/dms/image/C4D0BAQG4MPNpiYhykQ/company-logo_100_100/0/1560923328660?e=1654128000&v=beta&t=K05Pq-qnH6rYK8rvwwfhyEAqeaz2Ywy8u2Uiycv13Lk",
                     role = "Intern",
-                    startDate = "",
-                    endDate = ""
+                    startDate = "Nov 2012",
+                    endDate = "Nov 2014"
                 )
             )
         }

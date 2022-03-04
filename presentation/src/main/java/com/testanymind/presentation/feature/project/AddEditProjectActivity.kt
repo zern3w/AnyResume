@@ -2,8 +2,17 @@ package com.testanymind.presentation.feature.project
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.text.InputType
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.testanymind.domain.model.ProjectDetail
 import com.testanymind.presentation.R
@@ -11,7 +20,9 @@ import com.testanymind.presentation.base.DataBindingActivity
 import com.testanymind.presentation.databinding.ActivityAddEditProjectBinding
 import com.testanymind.presentation.extension.addChips
 import com.testanymind.presentation.extension.observe
+import com.testanymind.presentation.extension.observeEvent
 import com.testanymind.presentation.extension.observeTrigger
+import com.testanymind.presentation.util.KeyboardUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding>() {
@@ -27,8 +38,6 @@ class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding
             CREATE_MODE
         )
     }
-
-    private var chipList = mutableListOf<String>()
 
     companion object {
         private const val CREATE_MODE = -1
@@ -61,7 +70,7 @@ class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding
                                 teamSize = viewBinding.etTeamSize.text.toString().toIntOrNull()
                                     ?: -1,
                                 projectSummary = viewBinding.etProjectSummary.text.toString(),
-                                technologyUsed = chipList,
+                                technologyUsed = viewModel.techList.value?.toList().orEmpty(),
                                 role = viewBinding.etRole.text.toString(),
                                 logo = ""
                             )
@@ -74,7 +83,7 @@ class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding
                                 teamSize = viewBinding.etTeamSize.text.toString().toIntOrNull()
                                     ?: -1,
                                 projectSummary = viewBinding.etProjectSummary.text.toString(),
-                                technologyUsed = chipList,
+                                technologyUsed = viewModel.techList.value?.toList().orEmpty(),
                                 role = viewBinding.etRole.text.toString(),
                                 logo = ""
                             )
@@ -101,6 +110,19 @@ class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding
             getString(R.string.project)
         }"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        viewBinding.apply {
+            etTechUsed.apply {
+                setOnEditorActionListener { v, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        onActionDone(v)
+                        KeyboardUtils.hideKeyboard(etTechUsed)
+                        return@setOnEditorActionListener true
+                    }
+                    false
+                }
+            }
+        }
     }
 
     private fun initObserver() {
@@ -112,7 +134,9 @@ class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding
                     etProjectSummary.setText(it.projectSummary)
                     etRole.setText(it.role)
 
-                    chipGroup.addChips(it.technologyUsed)
+                    it.technologyUsed.forEach {
+                        addChipToGroup(it)
+                    }
                 }
             }
 
@@ -123,12 +147,22 @@ class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding
             observeTrigger(showConfirmationDiscard) {
                 showConfirmationDiscardDialog()
             }
+
+            observeEvent(addTechEvent, ::addChipToGroup)
         }
     }
 
     private fun areRequireWasFilled(): Boolean {
         viewBinding.apply {
             return !etProjectName.text.isNullOrEmpty() && !etTeamSize.text.isNullOrEmpty() && !etProjectSummary.text.isNullOrEmpty() && !etRole.text.isNullOrEmpty()
+        }
+    }
+
+    private fun onActionDone(v: TextView) {
+        val tech = v.text.trim().toString()
+        if (tech.isNotEmpty()) {
+            v.text = null
+            if (viewModel.isContainTech(tech).not()) viewModel.addTech(tech)
         }
     }
 
@@ -154,6 +188,39 @@ class AddEditProjectActivity : DataBindingActivity<ActivityAddEditProjectBinding
                 if (isVisible && etProjectSummary.text.isNullOrEmpty()) getString(R.string.error_required) else null
             textLayoutRole.error =
                 if (isVisible && etRole.text.isNullOrEmpty()) getString(R.string.error_required) else null
+        }
+    }
+
+    private fun addChipToGroup(_text: String) {
+        viewBinding.apply {
+            val chip = Chip(this@AddEditProjectActivity).apply {
+                text = _text
+                isClickable = true
+                isCheckable = false
+                isCloseIconVisible = true
+
+                setOnCloseIconClickListener {
+                    viewModel.removeTech(_text)
+                    etTechUsed.apply {
+                        visibility = View.VISIBLE
+                        inputType = InputType.TYPE_CLASS_TEXT
+                        requestFocus()
+                    }
+                    if (!KeyboardUtils.isShowingKeyboard) {
+                        KeyboardUtils.showKeyboard(etTechUsed)
+                    }
+                    chipGroup.removeView(this)
+                }
+            }
+            chip.apply {
+                chipStrokeWidth = 1f
+                chipBackgroundColor =
+                    ColorStateList.valueOf(Color.WHITE)
+                setTextColor(Color.BLACK)
+                closeIcon =
+                    ContextCompat.getDrawable(this@AddEditProjectActivity, R.drawable.ic_cross)
+            }
+            chipGroup.addView(chip)
         }
     }
 

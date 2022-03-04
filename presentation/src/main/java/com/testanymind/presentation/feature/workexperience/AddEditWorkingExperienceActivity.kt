@@ -209,7 +209,6 @@ class AddEditWorkingExperienceActivity :
         }, currentYear, currentMonth)
 
         builder.setMaxYear(currentYear)
-            .setMaxMonth(currentMonth)
             .setTitle(getString(if (isStartDate) R.string.hint_start_date else R.string.hint_end_date))
             .build()
             .show()

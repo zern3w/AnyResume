@@ -41,7 +41,7 @@
     <string name="hint_team_size">Team Size</string>
     <string name="hint_project_summary">Project Summary</string>
     <string name="hint_technology_used">Technology Used</string>
-    <string name="hint_add_technology_used">Add Technology Used</string>
+    <string name="hint_add_technology_used">Add Technology Used (Kotlin, Swift, Python)</string>
 
     <string name="hint_school_name">School Name</string>
     <string name="hint_company_name">Company Name</string>
@@ -61,6 +61,7 @@
     <string name="dialog_discard_message">Discard draft?</string>
 
     <string name="helper_require">*required</string>
+    <string name="helper_enter_to_add">Enter to add</string>
 
     <string name="confirmation">Confirmation</string>
     <string name="save">Save</string>

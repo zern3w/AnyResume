@@ -7,6 +7,7 @@ import com.testanymind.domain.common.DataCenter
 import com.testanymind.domain.common.Result
 import com.testanymind.domain.model.Education
 import com.testanymind.domain.model.ProjectDetail
+import com.testanymind.domain.model.Skill
 import com.testanymind.domain.usecase.*
 import com.testanymind.presentation.base.BaseViewModel
 import com.testanymind.presentation.lifecycle.LiveEvent
@@ -27,6 +28,15 @@ class AddEditProjectViewModel(
     private val _project = MutableLiveData<ProjectDetail>()
     val project: LiveData<ProjectDetail> = _project
 
+    private val _addTechEvent = MutableLiveEvent<String>()
+    val addTechEvent: LiveEvent<String> = _addTechEvent
+
+    private val _techList = MutableLiveData<MutableList<String>>(arrayListOf())
+    val techList: LiveData<MutableList<String>> = _techList
+
+    private val _hasTech = MutableLiveData<Boolean>()
+    val hasTech: LiveData<Boolean> = _hasTech
+
     private val _finishActivity = MutableLiveTrigger()
     val finishActivity: LiveTrigger = _finishActivity
 
@@ -41,6 +51,7 @@ class AddEditProjectViewModel(
                     _dataLoading.postValue(false)
                     result.data.filterNotNull().collect { data ->
                         _project.value = data.toProject()
+                        _techList.value = data.toProject().technologyUsed.toMutableList()
                     }
                 }
                 is Result.Error -> {
@@ -97,6 +108,43 @@ class AddEditProjectViewModel(
                 }
             }
         }
+    }
+
+    fun isContainTech(tech: String): Boolean {
+        return if (!isTechEmpty()) {
+            _techList.value?.find {
+                it.equals(tech, ignoreCase = true)
+            } != null
+        } else {
+            false
+        }
+    }
+
+    fun removeLastTech() {
+        if (!isTechEmpty()) {
+            _techList.value = _techList.value?.apply {
+                removeAt(this.size - 1)
+            }
+        }
+    }
+
+    fun removeTech(tech: String) {
+        if (!isTechEmpty()) {
+            _techList.value = _techList.value?.apply {
+                remove(tech)
+            }
+        }
+    }
+
+    fun addTech(tech: String) {
+        _techList.value = _techList.value?.apply {
+            add(tech)
+        }
+        _addTechEvent.setEventValue(tech)
+    }
+
+    fun isTechEmpty(): Boolean {
+        return _techList.value.isNullOrEmpty()
     }
 
     fun showConfirmationDiscard() {

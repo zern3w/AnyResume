@@ -92,6 +92,7 @@ fun ChipGroup.addChips(list: List<String>) {
 
 @BindingAdapter("add_stroke_chips")
 fun ChipGroup.addStrokeChips(list: List<String>) {
+    removeAllViews()
     list.forEach {
         val chip = Chip(this.context).apply {
             text = it
@@ -115,7 +116,7 @@ fun setImage(image: ShapeableImageView, url: String, placeHolder: Drawable) {
     } else {
         image.apply {
             val res = image.context.resources
-            val contentPadding = res.getDimensionPixelSize(R.dimen.spacing_xsmall)
+            val contentPadding = res.getDimensionPixelSize(R.dimen.spacing_medium)
             setContentPadding(
                 contentPadding,
                 contentPadding,

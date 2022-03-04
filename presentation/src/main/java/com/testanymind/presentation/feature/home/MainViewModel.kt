@@ -178,7 +178,6 @@ class MainViewModel(
                                 projectList.isEmpty()
                             )
                         )
-
                     }
                 }
                 is Result.Error -> {
@@ -230,6 +229,33 @@ class MainViewModel(
             _skillList.value = DataCenter.getDemoSkillList()
             _workingExpList.value = DataCenter.getDemoWorkingExperienceList()
             _projectList.value = DataCenter.getDemoProjectList()
+
+            _showOrHideEmptyState.setEventValue(
+                SectionEmptyState(
+                    SectionEmptyState.SECTION_EDUCATION,
+                    false
+                )
+            )
+
+            _showOrHideEmptyState.setEventValue(
+                SectionEmptyState(
+                    SectionEmptyState.SECTION_SKILL,
+                    false
+                )
+            )
+
+            _showOrHideEmptyState.setEventValue(
+                SectionEmptyState(
+                    SectionEmptyState.SECTION_EXPERIENCE,
+                    false
+                )
+            )
+
+            _showOrHideEmptyState.setEventValue(
+                SectionEmptyState(
+                    SectionEmptyState.SECTION_PROJECT, false
+                )
+            )
         }
     }
 }
